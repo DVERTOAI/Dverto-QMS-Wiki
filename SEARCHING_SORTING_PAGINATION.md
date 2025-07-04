@@ -1,43 +1,40 @@
-# Enhancement Proposal: Add Searching, Sorting, and Pagination to Department Area API
+# Enhancement Proposal: Add Searching, Sorting, and Pagination to API Endpoints
 
 ## Overview
 
-To improve the usability and scalability of the Department Area API, we propose adding **searching**, **sorting**, and improved **pagination** features to the `GET /api/departments-area` endpoint. These enhancements will allow clients to filter, sort, and efficiently page through department areas based on their needs.
+To improve the usability and scalability of API endpoints, we propose adding **searching**, **sorting**, and improved **pagination** features. These enhancements will allow clients to filter, sort, and efficiently page through data based on their needs.
 
 ---
 
 ## Proposed Features
 
 ### 1. Searching
-
-- **Feature:** Filter department areas by name or associated department name.
-- **How:** Accept query parameters like `search` that match against the `name` field of department areas, and optionally the related department's name.
+- **Feature:** Filter data by name or related fields.
+- **How:** Accept query parameters like `search` that match against specified fields.
 - **Example Request:**
   ```http
-  GET /api/departments-area?search=account
+  GET /api/resources?search=account
   ```
 
 ### 2. Sorting
-
-- **Feature:** Sort department areas by any column (e.g., `name`, `status`, `created_at`).
+- **Feature:** Sort data by any column (e.g., `name`, `status`).
 - **How:** Accept `sort_by` and `sort_order` query parameters.
-  - `sort_by`: field name to sort (e.g., `name`, `created_at`)
+  - `sort_by`: field name to sort (e.g., `name`)
   - `sort_order`: `asc` or `desc`
 - **Example Request:**
   ```http
-  GET /api/departments-area?sort_by=name&sort_order=asc
+  GET /api/resources?sort_by=name&sort_order=asc
   ```
 
 ### 3. Pagination
-
 - **Feature:** Allow clients to set the number of results per page and select the page.
 - **How:** Accept `page` and `per_page` query parameters.
-- **Defaults:** 
+- **Defaults:**
   - `per_page` default: 10
   - `page` default: 1
 - **Example Request:**
   ```http
-  GET /api/departments-area?page=2&per_page=25
+  GET /api/resources?page=2&per_page=25
   ```
 
 ---
@@ -45,24 +42,23 @@ To improve the usability and scalability of the Department Area API, we propose 
 ## Example: Combined Usage
 
 ```http
-GET /api/departments-area?search=production&sort_by=created_at&sort_order=desc&page=1&per_page=5
+GET /api/resources?search=production&sort_by=created_at&sort_order=desc&page=1&per_page=5
 ```
 
 ---
 
 ## Updated Endpoint Documentation
 
-### List All Department Areas (with Search, Sort, Pagination)
+### List All Resources (with Search, Sort, Pagination)
 
-**Endpoint:**  
-`GET /api/departments-area`
+**Endpoint:** `GET /api/resources`
 
 **Query Parameters:**
 
 | Name        | Type    | Description                                               |
 |-------------|---------|-----------------------------------------------------------|
-| search      | string  | Search term for department area name or department name   |
-| sort_by     | string  | Field to sort by (`name`, `status`, `created_at`, etc.)   |
+| search      | string  | Search term for resource name or related fields          |
+| sort_by     | string  | Field to sort by (`name`, `status`, etc.)   |
 | sort_order  | string  | `asc` or `desc`                                           |
 | page        | int     | Page number (default: 1)                                  |
 | per_page    | int     | Results per page (default: 10)                            |
@@ -70,14 +66,14 @@ GET /api/departments-area?search=production&sort_by=created_at&sort_order=desc&p
 **Example Request:**
 
 ```bash
-curl -X GET "https://your-api-domain.com/api/departments-area?search=account&sort_by=name&sort_order=asc&page=1&per_page=10" \
+curl -X GET "https://your-api-domain.com/api/resources?search=account&sort_by=name&sort_order=asc&page=1&per_page=10" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
-  -H "Authorization: Bearer <your_token>" \
-  -H "domain: psri.com"
+  -H "Authorization: Bearer <your_token>"
 ```
 
-**Example Response:**  
+**Example Response:**
+
 *(Response structure remains as in your original documentation, but results are filtered/sorted/paginated as requested.)*
 
 ---
