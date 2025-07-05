@@ -1,6 +1,6 @@
 # API Routes Documentation
 
-This document lists the available API endpoints for Department and Department Area management, as well as authentication. All endpoints are protected and require specific headers.
+This document lists the available API endpoints for Department, Department Area, and Observation management, as well as authentication. All endpoints are protected and require specific headers.
 
 ---
 
@@ -35,7 +35,6 @@ domain: psri.com
 | POST     | /api/departments              | Tenant\DepartmentController@store        | Create department     |
 | GET      | /api/departments/{department} | Tenant\DepartmentController@show         | Get department        |
 | PUT/PATCH| /api/departments/{department} | Tenant\DepartmentController@update       | Update department     |
-| DELETE   | /api/departments/{department} | Tenant\DepartmentController@destroy      | Delete department     |
 
 ---
 
@@ -47,25 +46,86 @@ domain: psri.com
 | POST      | /api/departments-area                   | Tenant\DepartmentAreaController@store                 | Create department area       |
 | GET       | /api/departments-area/{departments_area}| Tenant\DepartmentAreaController@show                  | Get department area          |
 | PUT/PATCH | /api/departments-area/{departments_area}| Tenant\DepartmentAreaController@update                | Update department area       |
-| DELETE    | /api/departments-area/{departments_area}| Tenant\DepartmentAreaController@destroy               | Delete department area       |
 
 ---
 
-## Other Endpoints
+## Observation Endpoints
+
+| Method    | Endpoint                            | Controller & Method                         | Description                  |
+|-----------|-------------------------------------|---------------------------------------------|------------------------------|
+| GET       | /api/observation                    | Tenant\ObservationController@index         | List observations            |
+| POST      | /api/observation                    | Tenant\ObservationController@store         | Create observation           |
+| GET       | /api/observation/{observation}      | Tenant\ObservationController@show          | Get observation              |
+| PUT/PATCH | /api/observation/{observation}      | Tenant\ObservationController@update        | Update observation           |
+
+---
+
+## System Endpoints
 
 | Method | Endpoint             | Controller & Method                             | Description            |
 |--------|----------------------|-------------------------------------------------|------------------------|
 | GET    | /sanctum/csrf-cookie | Laravel\Sanctum\CsrfCookieController@show       | Get CSRF cookie        |
 | GET    | /storage/{path}      | storage.local                                   | Access storage files   |
-| GET    | /                   | (root)                                          | (default home route)   |
+| GET    | /                   | (root)                                          | Default home route     |
 | GET    | /up                 | (health check)                                  | Laravel health check   |
+
+---
+
+## Complete Route List Summary
+
+Based on your Laravel route list, here are all 18 available routes:
+
+### Authentication (2 routes)
+- `POST /api/auth/tenant/login`
+- `POST /api/auth/tenant/logout`
+
+### Departments (4 routes)
+- `GET /api/departments`
+- `POST /api/departments`
+- `GET /api/departments/{department}`
+- `PUT/PATCH /api/departments/{department}`
+
+### Department Areas (4 routes)
+- `GET /api/departments-area`
+- `POST /api/departments-area`
+- `GET /api/departments-area/{departments_area}`
+- `PUT/PATCH /api/departments-area/{departments_area}`
+
+### Observations (4 routes)
+- `GET /api/observation`
+- `POST /api/observation`
+- `GET /api/observation/{observation}`
+- `PUT/PATCH /api/observation/{observation}`
+
+### System Routes (4 routes)
+- `GET /`
+- `GET /sanctum/csrf-cookie`
+- `GET /storage/{path}`
+- `GET /up`
 
 ---
 
 ## Notes
 
-- All endpoints (except `/`, `/up`, `/sanctum/csrf-cookie`, and `/storage/{path}`) require authentication using the headers above.
-- All data should be sent and received in JSON format.
-- For more details on request/response bodies, see the main `README.md`.
+- **Authentication Required:** All API endpoints (except system routes) require authentication using the headers above.
+- **Data Format:** All data should be sent and received in JSON format.
+- **File Uploads:** For observation endpoints with file attachments, use `multipart/form-data` encoding.
+- **Domain Header:** The `domain: psri.com` header is mandatory for all authenticated requests.
+- **Route Parameters:** Use the actual IDs when accessing specific resources (e.g., `/api/observation/14`).
+- **HTTP Methods:** Both `PUT` and `PATCH` are supported for update operations.
 
 ---
+
+## Quick Reference
+
+| Resource         | List All | Create | Get Single | Update | Delete |
+|------------------|----------|--------|------------|--------|--------|
+| Departments      | ✓        | ✓      | ✓          | ✓      | ✗      |
+| Department Areas | ✓        | ✓      | ✓          | ✓      | ✗      |
+| Observations     | ✓        | ✓      | ✓          | ✓      | ✗      |
+
+**Note:** Delete operations are not available for any of the main resources in this API version.
+
+---
+
+For detailed request/response examples and validation rules, refer to the individual API documentation files for each resource type.
