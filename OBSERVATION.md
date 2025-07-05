@@ -2,8 +2,6 @@
 
 This API provides endpoints to manage **Observations** in your application. All endpoints are protected by authentication via Laravel Sanctum.
 
-
-
 ## Database Table Structure
 
 The `observations` table contains the following fields:
@@ -50,6 +48,12 @@ The `attachments` table stores file attachments related to observations:
 | 8   | status            | enum('active', 'inactive')              |               | No   | active  |                 |
 | 9   | created_at        | timestamp                               |               | Yes  | NULL    |                 |
 | 10  | updated_at        | timestamp                               |               | Yes  | NULL    |                 |
+
+**Sample Attachment Row:**
+
+| id | documentable_type | documentable_id | name | file_path | mime_type | size | status | created_at | updated_at |
+|----|------------------|-----------------|------|-----------|-----------|------|--------|------------|------------|
+| 1 | App\Models\Tenant\Observation\Observation | 14 | 1751708119_Prince module issues.docx.pdf | uploads/observations/OBS100014/1751708119_Prince module issues.docx.pdf | application/pdf | 569919 | active | 2025-07-05 09:35:19 | 2025-07-05 09:35:19 |
 
 ---
 
@@ -391,8 +395,6 @@ curl -X PUT "https://your-api-domain.com/api/observation/14" \
   "errors": null
 }
 ```
-
-
 
 ## File Attachments
 
