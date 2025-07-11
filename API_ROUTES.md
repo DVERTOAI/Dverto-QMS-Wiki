@@ -60,6 +60,17 @@ domain: psri.com
 
 ---
 
+## Users Endpoints
+
+| Method    | Endpoint                            | Controller & Method                         | Description                  |
+|-----------|-------------------------------------|---------------------------------------------|------------------------------|
+| GET       | /api/users                    | Tenant\UserController@index         | List User            |
+| POST      | /api/users                    | Tenant\UserController@store         | Create User           |
+| GET       | /api/users/{users}      | Tenant\UserController@show          | Get User              |
+| PUT/PATCH | /api/users/{users}      | Tenant\UserController@update        | Update User           |
+
+---
+
 ## System Endpoints
 
 | Method | Endpoint             | Controller & Method                             | Description            |
@@ -97,6 +108,12 @@ Based on your Laravel route list, here are all 18 available routes:
 - `GET /api/observation/{observation}`
 - `PUT/PATCH /api/observation/{observation}`
 
+### Users (4 routes)
+- `GET /api/users`
+- `POST /api/users`
+- `GET /api/users/{users}`
+- `PUT/PATCH /api/users/{users}`
+
 ### System Routes (4 routes)
 - `GET /`
 - `GET /sanctum/csrf-cookie`
@@ -123,6 +140,7 @@ Based on your Laravel route list, here are all 18 available routes:
 | Departments      | ✓        | ✓      | ✓          | ✓      | ✗      |
 | Department Areas | ✓        | ✓      | ✓          | ✓      | ✗      |
 | Observations     | ✓        | ✓      | ✓          | ✓      | ✗      |
+| Users            | ✓        | ✓      | ✓          | ✓      | ✗      |
 
 **Note:** Delete operations are not available for any of the main resources in this API version.
 
