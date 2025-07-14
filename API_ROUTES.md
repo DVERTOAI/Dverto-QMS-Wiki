@@ -1,6 +1,6 @@
 # API Routes Documentation
 
-This document lists the available API endpoints for Department, Department Area, and Observation management, as well as authentication. All endpoints are protected and require specific headers.
+This document lists the available API endpoints for Department, Department Area, Designation, Observation management, and User management, as well as authentication. All endpoints are protected and require specific headers.
 
 ---
 
@@ -49,6 +49,17 @@ domain: psri.com
 
 ---
 
+## Designation Endpoints
+
+| Method    | Endpoint                            | Controller & Method                         | Description                  |
+|-----------|-------------------------------------|---------------------------------------------|------------------------------|
+| GET       | /api/designations                   | Tenant\DesignationController@index         | List designations            |
+| POST      | /api/designations                   | Tenant\DesignationController@store         | Create designation           |
+| GET       | /api/designations/{designation}     | Tenant\DesignationController@show          | Get designation              |
+| PUT/PATCH | /api/designations/{designation}     | Tenant\DesignationController@update        | Update designation           |
+
+---
+
 ## Observation Endpoints
 
 | Method    | Endpoint                            | Controller & Method                         | Description                  |
@@ -64,10 +75,10 @@ domain: psri.com
 
 | Method    | Endpoint                            | Controller & Method                         | Description                  |
 |-----------|-------------------------------------|---------------------------------------------|------------------------------|
-| GET       | /api/users                    | Tenant\UserController@index         | List User            |
-| POST      | /api/users                    | Tenant\UserController@store         | Create User           |
-| GET       | /api/users/{users}      | Tenant\UserController@show          | Get User              |
-| PUT/PATCH | /api/users/{users}      | Tenant\UserController@update        | Update User           |
+| GET       | /api/users                          | Tenant\UserController@index                | List users                   |
+| POST      | /api/users                          | Tenant\UserController@store                | Create user                  |
+| GET       | /api/users/{users}                  | Tenant\UserController@show                 | Get user                     |
+| PUT/PATCH | /api/users/{users}                  | Tenant\UserController@update               | Update user                  |
 
 ---
 
@@ -84,7 +95,7 @@ domain: psri.com
 
 ## Complete Route List Summary
 
-Based on your Laravel route list, here are all 18 available routes:
+Based on your Laravel route list, here are all 22 available routes:
 
 ### Authentication (2 routes)
 - `POST /api/auth/tenant/login`
@@ -101,6 +112,12 @@ Based on your Laravel route list, here are all 18 available routes:
 - `POST /api/departments-area`
 - `GET /api/departments-area/{departments_area}`
 - `PUT/PATCH /api/departments-area/{departments_area}`
+
+### Designations (4 routes)
+- `GET /api/designations`
+- `POST /api/designations`
+- `GET /api/designations/{designation}`
+- `PUT/PATCH /api/designations/{designation}`
 
 ### Observations (4 routes)
 - `GET /api/observation`
@@ -122,14 +139,18 @@ Based on your Laravel route list, here are all 18 available routes:
 
 ---
 
+
+---
+
 ## Notes
 
 - **Authentication Required:** All API endpoints (except system routes) require authentication using the headers above.
 - **Data Format:** All data should be sent and received in JSON format.
 - **File Uploads:** For observation endpoints with file attachments, use `multipart/form-data` encoding.
 - **Domain Header:** The `domain: psri.com` header is mandatory for all authenticated requests.
-- **Route Parameters:** Use the actual IDs when accessing specific resources (e.g., `/api/observation/14`).
+- **Route Parameters:** Use the actual IDs when accessing specific resources (e.g., `/api/designations/5`).
 - **HTTP Methods:** Both `PUT` and `PATCH` are supported for update operations.
+- **Unique Names:** For designations, names must be unique among active records only.
 
 ---
 
@@ -139,10 +160,23 @@ Based on your Laravel route list, here are all 18 available routes:
 |------------------|----------|--------|------------|--------|--------|
 | Departments      | ✓        | ✓      | ✓          | ✓      | ✗      |
 | Department Areas | ✓        | ✓      | ✓          | ✓      | ✗      |
+| Designations     | ✓        | ✓      | ✓          | ✓      | ✗      |
 | Observations     | ✓        | ✓      | ✓          | ✓      | ✗      |
 | Users            | ✓        | ✓      | ✓          | ✓      | ✗      |
 
 **Note:** Delete operations are not available for any of the main resources in this API version.
+
+---
+
+## Resource Features
+
+| Resource         | Search | Sort | Pagination | Unique Constraint |
+|------------------|--------|------|------------|-------------------|
+| Departments      | ✓      | ✓    | ✓          | Active names only |
+| Department Areas | ✓      | ✓    | ✓          | All names         |
+| Designations     | ✓      | ✓    | ✓          | Active names only |
+| Observations     | ✓      | ✓    | ✓          | No                |
+| Users            | ✓      | ✓    | ✓          | Email/Username    |
 
 ---
 
