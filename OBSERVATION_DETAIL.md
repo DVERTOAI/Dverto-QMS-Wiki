@@ -64,8 +64,14 @@ domain: psri.com
 - **Description:** Accept an observation to initiate action workflow.
 
 ---
+### 2. Accept Observation
 
-### 2. Assign Observation
+- **Endpoint:** `POST /api/observations/{id}/decline`
+- **Description:** Decline an observation to initiate action workflow.
+
+---
+
+### 3. Assign Observation
 
 - **Endpoint:** `POST /api/observations/{id}/assign`
 - **Description:** Assign observation to a user and department.
@@ -90,7 +96,7 @@ domain: psri.com
 
 ---
 
-### 3. Submit RCA (Root Cause Analysis)
+### 4. Submit RCA (Root Cause Analysis)
 
 - **Endpoint:** `POST /api/observations/{id}/rca`
 - **Description:** Submit Root Cause Analysis and action plans. Users may also postpone.
@@ -139,7 +145,7 @@ domain: psri.com
 
 ---
 
-### 4. Reassign Observation
+### 5. Reassign Observation
 
 - **Endpoint:** `POST /api/observations/{id}/reassign`
 - **Description:** Reassign observation (allowed only once)
@@ -159,7 +165,7 @@ Same as **Assign Observation**, but with `reassign_file` (optional)
 
 ---
 
-### 5. Close Observation
+### 6. Close Observation
 
 - **Endpoint:** `POST /api/observations/{id}/close`
 - **Description:** Close the observation after completion.
@@ -226,6 +232,7 @@ Same as **Assign Observation**, but with `reassign_file` (optional)
 | Action         | Endpoint                        | Method | Description                  |
 |----------------|---------------------------------|--------|------------------------------|
 | Accept         | /api/observations/{id}/accept   | POST   | Accept observation           |
+| Decline         | /api/observations/{id}/decline   | POST   | Declined observation           |
 | Assign         | /api/observations/{id}/assign   | POST   | Assign to user/department    |
 | RCA Submission | /api/observations/{id}/rca      | POST   | Submit RCA & postpone        |
 | Reassign       | /api/observations/{id}/reassign | POST   | Reassign observation         |
