@@ -64,7 +64,7 @@ domain: psri.com
 - **Description:** Accept an observation to initiate action workflow.
 
 ---
-### 2. Accept Observation
+### 2. Decline Observation
 
 - **Endpoint:** `POST /api/observations/{id}/decline`
 - **Description:** Decline an observation to initiate action workflow.
