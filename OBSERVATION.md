@@ -10,25 +10,24 @@ The `observations` table contains the following fields:
 |-----|------------------|-----------------------------------------|---------------|------|---------|-----------------|
 | 1   | id               | bigint(20) unsigned                     | Primary Key   | No   | None    | AUTO_INCREMENT  |
 | 2   | observation_no   | varchar(255)                            | Unique        | No   | None    |                 |
-| 3   | observation_date | date                                    |               | No   | None    |                 |
-| 4   | observation_time | time                                    |               | No   | None    |                 |
-| 5   | observation_id   | bigint(20) unsigned (Indexed, FK)       |               | No   | None    |                 |
-| 6   | description      | text                                    |               | No   | None    |                 |
-| 7   | allocation_time  | timestamp                               |               | Yes  | NULL    |                 |
-| 8   | status           | enum'open','accepted','declined','assigned','rca_submitted','closed','reassigned','postponed')  |               | No   | open    |                 |
-| 9   | assigned_at      | timestamp                               |               | Yes  | NULL    |                 |
-| 10  | final_remark     | text                                    |               | Yes  | NULL    |                 |
-| 11  | close_remark     | text                                    |               | Yes  | NULL    |                 |
-| 12  | spot_id          | bigint(20) unsigned (Indexed, FK to department_areas) |               | No   | None    |                 |
-| 13  | deleted_at       | timestamp                               |               | Yes  | NULL    |                 |
-| 14  | created_at       | timestamp                               |               | Yes  | NULL    |                 |
-| 15  | updated_at       | timestamp                               |               | Yes  | NULL    |                 |
+| 3   | observation_datetime | datetime                                   |               | No   | None    |                 |
+| 4   | observation_id   | bigint(20) unsigned (Indexed, FK)       |               | No   | None    |                 |
+| 5   | description      | text                                    |               | No   | None    |                 |
+| 6   | allocation_time  | timestamp                               |               | Yes  | NULL    |                 |
+| 7   | status           | enum'open','accepted','declined','assigned','rca_submitted','closed','reassigned','postponed')  |               | No   | open    |                 |
+| 8   | assigned_at      | timestamp                               |               | Yes  | NULL    |                 |
+| 9  | final_remark     | text                                    |               | Yes  | NULL    |                 |
+| 10  | close_remark     | text                                    |               | Yes  | NULL    |                 |
+| 11  | spot_id          | bigint(20) unsigned (Indexed, FK to department_areas) |               | No   | None    |                 |
+| 12  | deleted_at       | timestamp                               |               | Yes  | NULL    |                 |
+| 13  | created_at       | timestamp                               |               | Yes  | NULL    |                 |
+| 14  | updated_at       | timestamp                               |               | Yes  | NULL    |                 |
 
 **Sample Row:**
 
-| id | observation_no | observation_date | observation_time | observation_id | description | status | spot_id | created_at           | updated_at           |
+| id | observation_no | observation_datetime | observation_id | description | status | spot_id | created_at           | updated_at           |
 |----|---------------|------------------|------------------|----------------|-------------|--------|---------|----------------------|----------------------|
-| 14 | OBS100014     | 2025-07-01       | 14:05            | 1              | Observed    | open   | 1       | 2025-07-05 09:35:18  | 2025-07-05 10:24:11  |
+| 14 | OBS100014     | 2022-12-02 15:45:00            | 1              | Observed    | open   | 1       | 2025-07-05 09:35:18  | 2025-07-05 10:24:11  |
 
 ---
 
@@ -109,8 +108,7 @@ curl -X GET "https://your-api-domain.com/api/observation" \
       {
         "id": 15,
         "observation_no": "OBS100015",
-        "observation_date": "2024-07-01T00:00:00.000000Z",
-        "observation_time": "14:05",
+       "observation_datetime": "2022-12-02T15:45:00.000000Z",
         "observation_id": 1,
         "description": "Observed rare bird species near the lake",
         "allocation_time": null,
@@ -126,8 +124,7 @@ curl -X GET "https://your-api-domain.com/api/observation" \
       {
         "id": 14,
         "observation_no": "OBS100014",
-        "observation_date": "2025-07-01T00:00:00.000000Z",
-        "observation_time": "14:05",
+        "observation_datetime": "2022-12-02T15:45:00.000000Z",
         "observation_id": 1,
         "description": "Observed",
         "allocation_time": null,
@@ -182,8 +179,7 @@ curl -X GET "https://your-api-domain.com/api/observation" \
 **Example Request Body:**
 ```json
 {
-  "observation_date": "2025-07-01",
-  "observation_time": "14:05:11",
+  "observation_datetime": "2022-12-02 15:45:00",
   "spot_id": 1,
   "description": "Observed rare bird species near the lake"
 }
@@ -211,8 +207,7 @@ curl -X POST "https://your-api-domain.com/api/observation" \
   "data": {
     "id": 15,
     "observation_no": "OBS100015",
-    "observation_date": "2024-07-01T00:00:00.000000Z",
-    "observation_time": "14:05",
+    "observation_datetime": "2022-12-02T15:45:00.000000Z",
     "observation_id": 1,
     "description": "Observed rare bird species near the lake",
     "allocation_time": null,
@@ -272,8 +267,7 @@ curl -X GET "https://your-api-domain.com/api/observation/14" \
   "data": {
     "id": 14,
     "observation_no": "OBS100014",
-    "observation_date": "2025-07-01T00:00:00.000000Z",
-    "observation_time": "14:05",
+    "observation_datetime": "2022-12-02T15:45:00.000000Z",
     "observation_id": 1,
     "description": "Observed",
     "allocation_time": null,
@@ -342,8 +336,7 @@ curl -X GET "https://your-api-domain.com/api/observation/14" \
 **Example Request Body:**
 ```json
 {
-  "observation_date": "2025-07-01",
-  "observation_time": "14:05:15",
+  "observation_datetime":"2022-12-02 15:45:00",
   "spot_id": 1,
   "description": "Updated observation description"
 }
@@ -368,8 +361,7 @@ curl -X PUT "https://your-api-domain.com/api/observation/14" \
   "data": {
     "id": 14,
     "observation_no": "OBS100014",
-    "observation_date": "2025-07-01T00:00:00.000000Z",
-    "observation_time": "14:05",
+   "observation_datetime": "2022-12-02T15:45:00.000000Z",
     "observation_id": 1,
     "description": "Updated observation description",
     "allocation_time": null,
