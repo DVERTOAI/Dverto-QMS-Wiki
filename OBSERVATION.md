@@ -15,7 +15,7 @@ The `observations` table contains the following fields:
 | 5   | observation_id   | bigint(20) unsigned (Indexed, FK)       |               | No   | None    |                 |
 | 6   | description      | text                                    |               | No   | None    |                 |
 | 7   | allocation_time  | timestamp                               |               | Yes  | NULL    |                 |
-| 8   | status           | enum('Open', 'Closed', 'In Progress')  |               | No   | Open    |                 |
+| 8   | status           | enum'open','accepted','declined','assigned','rca_submitted','closed','reassigned','postponed')  |               | No   | open    |                 |
 | 9   | assigned_at      | timestamp                               |               | Yes  | NULL    |                 |
 | 10  | final_remark     | text                                    |               | Yes  | NULL    |                 |
 | 11  | close_remark     | text                                    |               | Yes  | NULL    |                 |
@@ -28,7 +28,7 @@ The `observations` table contains the following fields:
 
 | id | observation_no | observation_date | observation_time | observation_id | description | status | spot_id | created_at           | updated_at           |
 |----|---------------|------------------|------------------|----------------|-------------|--------|---------|----------------------|----------------------|
-| 14 | OBS100014     | 2025-07-01       | 14:05            | 1              | Observed    | Open   | 1       | 2025-07-05 09:35:18  | 2025-07-05 10:24:11  |
+| 14 | OBS100014     | 2025-07-01       | 14:05            | 1              | Observed    | open   | 1       | 2025-07-05 09:35:18  | 2025-07-05 10:24:11  |
 
 ---
 
@@ -114,7 +114,7 @@ curl -X GET "https://your-api-domain.com/api/observation" \
         "observation_id": 1,
         "description": "Observed rare bird species near the lake",
         "allocation_time": null,
-        "status": "Open",
+        "status": "open",
         "assigned_at": null,
         "final_remark": null,
         "close_remark": null,
@@ -131,7 +131,7 @@ curl -X GET "https://your-api-domain.com/api/observation" \
         "observation_id": 1,
         "description": "Observed",
         "allocation_time": null,
-        "status": "Open",
+        "status": "open",
         "assigned_at": "2025-07-01T13:50:00.000000Z",
         "final_remark": null,
         "close_remark": null,
@@ -216,7 +216,7 @@ curl -X POST "https://your-api-domain.com/api/observation" \
     "observation_id": 1,
     "description": "Observed rare bird species near the lake",
     "allocation_time": null,
-    "status": "Open",
+    "status": "open",
     "assigned_at": null,
     "final_remark": null,
     "close_remark": null,
@@ -277,7 +277,7 @@ curl -X GET "https://your-api-domain.com/api/observation/14" \
     "observation_id": 1,
     "description": "Observed",
     "allocation_time": null,
-    "status": "Open",
+    "status": "open",
     "assigned_at": "2025-07-01T13:50:00.000000Z",
     "final_remark": null,
     "close_remark": null,
@@ -373,7 +373,7 @@ curl -X PUT "https://your-api-domain.com/api/observation/14" \
     "observation_id": 1,
     "description": "Updated observation description",
     "allocation_time": null,
-    "status": "Open",
+    "status": "open",
     "assigned_at": "2025-07-01T13:50:00.000000Z",
     "final_remark": null,
     "close_remark": null,
@@ -440,7 +440,7 @@ Each attachment record contains:
 ## Status Values
 
 The observation status can be one of the following:
-- `Open`: Initial status for new observations
+- `open`: Initial status for new observations
 - `In Progress`: Observation is being worked on
 - `Closed`: Observation has been completed
 
