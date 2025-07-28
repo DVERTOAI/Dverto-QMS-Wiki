@@ -359,19 +359,3 @@ domain: psri.com
 * **Attachments**: Stored under incident folder structure
 
 ---
-
-> Let me know if you want:
->
-> * Export/Filter options
-> * Attachments endpoint
-> * Response schema or examples
-> * PDF version
-
-```
-
-Let me know if you'd like:
-- A downloadable **PDF version**
-- A **Postman collection**
-- **Response examples**
-- A separate section for **attachments CRUD API**
-- Inclusion of error responses and status codes.
