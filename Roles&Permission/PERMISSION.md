@@ -15,65 +15,6 @@ All routes are protected by Laravel Sanctum or Passport authentication.
 | Accept        | application/json     |
 | Content-Type  | application/json     |
 
----
-
-## 📥 Create Permission
-
-### `POST /api/permissions`
-
-Creates a new permission, either as a parent or child.
-
-### 🔸 Request Body
-
-| Field       | Type     | Required | Description                                 |
-|-------------|----------|----------|---------------------------------------------|
-| name        | string   | Yes      | Name of the permission (must be unique)     |
-| is_parent   | boolean  | No       | `true` if it's a parent permission          |
-| parent_id   | integer  | Required if `is_parent` is false | ID of parent permission (must exist) |
-
-### 🧪 Example Request
-
-```json
-{
-  "name": "edit department",
-  "is_parent": false,
-  "parent_id": 1
-}
-````
-
-### ✅ Success Response (201 Created)
-
-```json
-{
-  "success": true,
-  "status": 201,
-  "message": "Permission created successfully",
-  "data": {
-    "id": 37,
-    "name": "edit department",
-    "guard_name": "api",
-    "is_parent": false,
-    "parent_id": 1,
-    "created_at": "2025-07-30T12:00:00.000000Z",
-    "updated_at": "2025-07-30T12:00:00.000000Z"
-  }
-}
-```
-
-### ❌ Validation Errors
-
-```json
-{
-  "message": "The given data was invalid.",
-  "errors": {
-    "name": ["The permission name has already been taken."],
-    "parent_id": ["The parent_id field is required when is_parent is false."]
-  }
-}
-```
-
----
-
 ## 📄 List All Permissions
 
 ### `GET /api/permissions`
