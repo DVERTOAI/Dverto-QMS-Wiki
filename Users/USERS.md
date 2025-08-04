@@ -117,7 +117,7 @@ This API provides endpoints to manage users in the system. All routes are protec
   "mobile": "9876543210",
   "password": "password123",
   "status": "active",
-  "designation": "Software Engineer",
+  "designation": 1,
   "department_id": 1,
   "gender": "male",
   "location": "New Delhi",
