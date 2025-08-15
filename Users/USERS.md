@@ -111,22 +111,24 @@ This API provides endpoints to manage users in the system. All routes are protec
 
 ```json
 {
-  "name": "John Doe",
-  "email": "john.doe@company.com",
-  "username": "john.doe",
-  "mobile": "9876543210",
-  "password": "password123",
-  "status": "active",
-  "designation": "sde",
-  "department_id": 1,
-  "gender": "male",
-  "location": "New Delhi",
-  "date_joined": "2024-01-15",
-  "is_internal_auditor": true,
-  "is_incident_assignee": false,
-  "is_observation_assignee": true,
-  "is_indicator_assignee": false
-}
+ "name": "helio",
+ "email": "helio@example.com",
+ "username": "helio",
+ "mobile": "8295875792",
+ "status": "active",
+ "designation": "Auditor",
+ "password": "password123",
+ "department_id": 1,
+ "role_id": 1,
+ "gender":"male",
+ "location":"dehli",
+ "date_joined":"8-5-2003",
+ "department_head": true,
+ "is_internal_auditor": true,
+ "is_incident_assignee":false,
+ "is_indicator_assignee": false,
+ "is_observation_assignee": true
+ }
 ```
 
 ## Notes
