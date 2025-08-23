@@ -28,7 +28,7 @@ The `department_areas` table contains the following fields:
 ## Base URL
 
 ```
-https://your-api-domain.com/api/departments-area
+https://your-api-domain.com/api/department-areas
 ```
 *Replace `your-api-domain.com` with your actual API domain.*
 
@@ -53,12 +53,12 @@ domain: psri.com
 
 ### 1. List All Department Areas
 
-- **Endpoint:** `GET /api/departments-area`
+- **Endpoint:** `GET /api/department-areas`
 - **Description:** Get a paginated list of department areas, including their departments.
 
 **Example Request:**
 ```bash
-curl -X GET "https://your-api-domain.com/api/departments-area" \
+curl -X GET "https://your-api-domain.com/api/department-areas" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "Authorization: Bearer <your_token>" \
@@ -90,10 +90,10 @@ curl -X GET "https://your-api-domain.com/api/departments-area" \
         }
       }
     ],
-    "first_page_url": "http://127.0.0.1:8000/api/departments-area?page=1",
+    "first_page_url": "http://127.0.0.1:8000/api/department-areas?page=1",
     "from": 1,
     "last_page": 1,
-    "last_page_url": "http://127.0.0.1:8000/api/departments-area?page=1",
+    "last_page_url": "http://127.0.0.1:8000/api/department-areas?page=1",
     "links": [
       {
         "url": null,
@@ -101,7 +101,7 @@ curl -X GET "https://your-api-domain.com/api/departments-area" \
         "active": false
       },
       {
-        "url": "http://127.0.0.1:8000/api/departments-area?page=1",
+        "url": "http://127.0.0.1:8000/api/department-areas?page=1",
         "label": "1",
         "active": true
       },
@@ -112,7 +112,7 @@ curl -X GET "https://your-api-domain.com/api/departments-area" \
       }
     ],
     "next_page_url": null,
-    "path": "http://127.0.0.1:8000/api/departments-area",
+    "path": "http://127.0.0.1:8000/api/department-areas",
     "per_page": 10,
     "prev_page_url": null,
     "to": 1,
@@ -125,7 +125,7 @@ curl -X GET "https://your-api-domain.com/api/departments-area" \
 
 ### 2. Create a Department Area
 
-- **Endpoint:** `POST /api/departments-area`
+- **Endpoint:** `POST /api/department-areas`
 - **Description:** Create a new department area.
 
 **Example Request Body:**
@@ -138,7 +138,7 @@ curl -X GET "https://your-api-domain.com/api/departments-area" \
 
 **Example Request:**
 ```bash
-curl -X POST "https://your-api-domain.com/api/departments-area" \
+curl -X POST "https://your-api-domain.com/api/department-areas" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "Authorization: Bearer <your_token>" \
@@ -184,12 +184,12 @@ curl -X POST "https://your-api-domain.com/api/departments-area" \
 
 ### 3. Get a Single Department Area
 
-- **Endpoint:** `GET /api/departments-area/{id}`
+- **Endpoint:** `GET /api/department-areas/{id}`
 - **Description:** Get details of a specific department area by its ID.
 
 **Example Request:**
 ```bash
-curl -X GET "https://your-api-domain.com/api/departments-area/2" \
+curl -X GET "https://your-api-domain.com/api/department-areas/2" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "Authorization: Bearer <your_token>" \
@@ -227,7 +227,7 @@ curl -X GET "https://your-api-domain.com/api/departments-area/2" \
 
 ### 4. Update a Department Area
 
-- **Endpoint:** `PUT /api/departments-area/{id}`
+- **Endpoint:** `PUT /api/department-areas/{id}`
 - **Description:** Update an existing department area.
 
 **Example Request Body:**
@@ -240,7 +240,7 @@ curl -X GET "https://your-api-domain.com/api/departments-area/2" \
 
 **Example Request:**
 ```bash
-curl -X PUT "https://your-api-domain.com/api/departments-area/2" \
+curl -X PUT "https://your-api-domain.com/api/department-areas/2" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "Authorization: Bearer <your_token>" \
@@ -287,12 +287,12 @@ curl -X PUT "https://your-api-domain.com/api/departments-area/2" \
 
 ### 5. Delete a Department Area
 
-- **Endpoint:** `DELETE /api/departments-area/{id}`
+- **Endpoint:** `DELETE /api/department-areas/{id}`
 - **Description:** Delete a department area by its ID.
 
 **Example Request:**
 ```bash
-curl -X DELETE "https://your-api-domain.com/api/departments-area/2" \
+curl -X DELETE "https://your-api-domain.com/api/department-areas/2" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "Authorization: Bearer <your_token>" \
@@ -323,11 +323,11 @@ curl -X DELETE "https://your-api-domain.com/api/departments-area/2" \
 
 | Method | Endpoint                      | Description                       |
 |--------|-------------------------------|-----------------------------------|
-| GET    | /api/departments-area         | List all department areas         |
-| POST   | /api/departments-area         | Create a department area          |
-| GET    | /api/departments-area/{id}    | Get a specific department area    |
-| PUT    | /api/departments-area/{id}    | Update a department area          |
-| DELETE | /api/departments-area/{id}    | Delete a department area          |
+| GET    | /api/department-areas         | List all department areas         |
+| POST   | /api/department-areas         | Create a department area          |
+| GET    | /api/department-areas/{id}    | Get a specific department area    |
+| PUT    | /api/department-areas/{id}    | Update a department area          |
+| DELETE | /api/department-areas/{id}    | Delete a department area          |
 
 ---
 
