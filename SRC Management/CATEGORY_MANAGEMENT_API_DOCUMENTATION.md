@@ -1,148 +1,169 @@
----
 
-Category Management API Documentation
+# Category Management API Documentation
 
-This API provides endpoints to manage Category-Subcategory Mappings in your application. All endpoints are protected by authentication via Laravel Sanctum.
-
+This API provides endpoints to manage **Category-Subcategory Mappings** in your application. All endpoints are protected by authentication via Laravel Sanctum.
 
 ---
 
-Database Table Structure
+## Database Table Structure
 
-The src_category_management table contains the following fields:
+The `src_category_management` table contains the following fields:
 
-#	Name	Type	Attributes	Null	Default	Extra
+| #   | Name           | Type                                    | Attributes     | Null | Default | Extra           |
+|-----|----------------|-----------------------------------------|---------------|------|---------|-----------------|
+| 1   | id             | bigint(20) unsigned                     | Primary Key   | No   | None    | AUTO_INCREMENT  |
+| 2   | category_id    | bigint(20) unsigned                     | Foreign Key   | No   | None    |                 |
+| 3   | subcategory_id | bigint(20) unsigned                     | Foreign Key   | No   | None    |                 |
+| 4   | created_at     | timestamp                               |               | Yes  | NULL    |                 |
+| 5   | updated_at     | timestamp                               |               | Yes  | NULL    |                 |
 
-1	id	bigint(20) unsigned	Primary Key	No	None	AUTO_INCREMENT
-2	category_id	bigint(20) unsigned	Foreign Key	No	None	
-3	subcategory_id	bigint(20) unsigned	Foreign Key	No	None	
-4	created_at	timestamp		Yes	NULL	
-5	updated_at	timestamp		Yes	NULL	
+**Foreign Key Constraints:**
+- `category_id` references `src_sources.id` (where type='category')
+- `subcategory_id` references `src_sources.id` (where type='subcategory')
+- Unique constraint on `(category_id, subcategory_id)` to prevent duplicates
 
+**Sample Row:**
 
-Foreign Key Constraints:
-
-category_id references src_sources.id (where type = 'category')
-
-subcategory_id references src_sources.id (where type = 'subcategory')
-
-Unique constraint on (category_id, subcategory_id) to prevent duplicates
-
-
-Sample Row:
-
-id	category_id	subcategory_id	created_at	updated_at
-
-4	1	2	2025-08-23 13:46:06	2025-08-23 13:46:06
-5	1	4	2025-08-23 13:46:06	2025-08-23 13:46:06
-
-
+| id | category_id | subcategory_id | created_at           | updated_at           |
+|----|-------------|----------------|----------------------|----------------------|
+| 4  | 1           | 2              | 2025-08-23 13:46:06  | 2025-08-23 13:46:06  |
+| 5  | 1           | 4              | 2025-08-23 13:46:06  | 2025-08-23 13:46:06  |
 
 ---
 
-Base URL
+## Base URL
 
-https://your-api-domain.com/api/category-management
+```
 
-Replace your-api-domain.com with your actual API domain.
+[https://your-api-domain.com/api/category-management](https://your-api-domain.com/api/category-management)
 
+````
+*Replace `your-api-domain.com` with your actual API domain.*
 
 ---
 
-Authentication
+## Authentication
 
 All endpoints require a valid Bearer token obtained from the login endpoint.
 
-Required Headers:
-
+**Required Headers:**
+```http
 Content-Type: application/json
 Accept: application/json
 Authorization: Bearer <your_token>
 domain: psri.com
+````
 
+* Replace `<your_token>` with the token received from your login response.
 
 ---
 
-Endpoints
+## Endpoints
 
-1. Get All Categories
+### 1. Get All Categories
 
-Endpoint: GET /api/category-management/categories
-Description: Retrieve all active categories for dropdown selection.
+* **Endpoint:** `GET /api/category-management/categories`
+* **Description:** Get all active categories for dropdown selection.
 
-Example Request:
+**Example Request:**
 
+```bash
 curl -X GET "https://your-api-domain.com/api/category-management/categories" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "Authorization: Bearer <your_token>" \
   -H "domain: psri.com"
+```
 
-Example Response:
+**Example Response:**
 
+```json
 {
   "success": true,
   "status": 200,
   "message": "Categories fetched successfully",
   "data": [
-    { "id": 1, "name": "Campus Link" },
-    { "id": 2, "name": "Online Portal" },
-    { "id": 3, "name": "Student Services" }
+    {
+      "id": 1,
+      "name": "Campus Link"
+    },
+    {
+      "id": 2,
+      "name": "Online Portal"
+    },
+    {
+      "id": 3,
+      "name": "Student Services"
+    }
   ]
 }
-
+```
 
 ---
 
-2. Get All Subcategories
+### 2. Get All Subcategories
 
-Endpoint: GET /api/category-management/subcategories
-Description: Retrieve all active subcategories for reference.
+* **Endpoint:** `GET /api/category-management/subcategories`
+* **Description:** Get all active subcategories for reference.
 
-Example Request:
+**Example Request:**
 
+```bash
 curl -X GET "https://your-api-domain.com/api/category-management/subcategories" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "Authorization: Bearer <your_token>" \
   -H "domain: psri.com"
+```
 
-Example Response:
+**Example Response:**
 
+```json
 {
   "success": true,
   "status": 200,
   "message": "Subcategories fetched successfully",
   "data": [
-    { "id": 4, "name": "Faculty Portal" },
-    { "id": 5, "name": "Library System" },
-    { "id": 6, "name": "Admin Panel" }
+    {
+      "id": 4,
+      "name": "Faculty Portal"
+    },
+    {
+      "id": 5,
+      "name": "Library System"
+    },
+    {
+      "id": 6,
+      "name": "Admin Panel"
+    }
   ]
 }
-
+```
 
 ---
 
-3. Get Category Mappings
+### 3. Get Category Mappings
 
-Endpoint: GET /api/category-management/mappings
-Description: Get available and mapped subcategories for a specific category.
+* **Endpoint:** `GET /api/category-management/mappings`
+* **Description:** Get available and mapped subcategories for a specific category.
 
-Query Parameters:
+**Query Parameters:**
 
-category_id (required): The category ID
+* `category_id` (required): The category ID to get mappings for
 
+**Example Request:**
 
-Example Request:
-
+```bash
 curl -X GET "https://your-api-domain.com/api/category-management/mappings?category_id=1" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "Authorization: Bearer <your_token>" \
   -H "domain: psri.com"
+```
 
-Example Response:
+**Example Response:**
 
+```json
 {
   "success": true,
   "status": 200,
@@ -150,53 +171,68 @@ Example Response:
   "data": {
     "category_id": 1,
     "available_subcategories": [
-      { "id": 5, "name": "Library System" },
-      { "id": 6, "name": "Admin Panel" }
+      {
+        "id": 5,
+        "name": "Library System"
+      },
+      {
+        "id": 6,
+        "name": "Admin Panel"
+      }
     ],
     "mapped_subcategories": [
-      { "id": 4, "name": "Faculty Portal" }
+      {
+        "id": 4,
+        "name": "Faculty Portal"
+      }
     ],
     "total_mapped": 1
   }
 }
-
+```
 
 ---
 
-4. Update Category Mappings
+### 4. Update Category Mappings
 
-Endpoint: POST /api/category-management/add-subcategory
-Description: Update category-subcategory mappings by providing an array of subcategory IDs.
+* **Endpoint:** `POST /api/category-management/add-subcategory`
+* **Description:** Update category-subcategory mappings by providing an array of subcategory IDs. This endpoint handles both adding and removing mappings based on the provided array.
 
-Request Body Fields:
+**Request Body Fields:**
 
-category_id (required): The category ID
+* `category_id` (required): The category ID (must be an active category)
+* `subcategory_id` (required): Array of subcategory IDs (each must be an active subcategory)
 
-subcategory_id (required): Array of subcategory IDs
+**Behavior:**
 
+* **Adds** subcategories that are in the array but not currently mapped
+* **Removes** subcategories that are currently mapped but not in the array
+* **Keeps** subcategories that are both currently mapped and in the array
+* **Empty array** removes all mappings for the category
 
-Behavior:
+**Example Request Body:**
 
-Adds subcategories not currently mapped
+```json
+{
+  "category_id": "1",
+  "subcategory_id": [4, 5, 6]
+}
+```
 
-Removes subcategories not in the array
+**Example Request:**
 
-Keeps subcategories present in both
-
-Empty array removes all mappings
-
-
-Example Request:
-
+```bash
 curl -X POST "https://your-api-domain.com/api/category-management/add-subcategory" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "Authorization: Bearer <your_token>" \
   -H "domain: psri.com" \
   -d '{"category_id":"1","subcategory_id":[4,5,6]}'
+```
 
-Example Response:
+**Example Response:**
 
+```json
 {
   "success": true,
   "status": 200,
@@ -205,25 +241,38 @@ Example Response:
     "category_id": 1,
     "available_subcategories": [],
     "mapped_subcategories": [
-      { "id": 4, "name": "Faculty Portal" },
-      { "id": 5, "name": "Library System" },
-      { "id": 6, "name": "Admin Panel" }
+      {
+        "id": 4,
+        "name": "Faculty Portal"
+      },
+      {
+        "id": 5,
+        "name": "Library System"
+      },
+      {
+        "id": 6,
+        "name": "Admin Panel"
+      }
     ],
     "total_mapped": 3
   }
 }
+```
 
-Example (Remove All):
+**Remove All Mappings (Empty Array):**
 
+```bash
 curl -X POST "https://your-api-domain.com/api/category-management/add-subcategory" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "Authorization: Bearer <your_token>" \
   -H "domain: psri.com" \
   -d '{"category_id":"1","subcategory_id":[]}'
+```
 
-Validation Errors:
+**Validation Error Example (Missing Fields):**
 
+```json
 {
   "message": "The given data was invalid.",
   "errors": {
@@ -231,92 +280,101 @@ Validation Errors:
     "subcategory_id": ["At least one subcategory must be selected."]
   }
 }
+```
 
+**Validation Error Example (Invalid Category):**
 
----
+```json
+{
+  "message": "The given data was invalid.",
+  "errors": {
+    "category_id": [
+      "Selected category does not exist or is not active."
+    ]
+  }
+}
+```
 
-Business Rules
+**Validation Error Example (Non-Array Format):**
 
-One-to-Many: One category can map to multiple subcategories
+```json
+{
+  "message": "The given data was invalid.",
+  "errors": {
+    "subcategory_id": [
+      "Subcategories must be provided as an array."
+    ]
+  }
+}
+```
 
-Many-to-Many: One subcategory can be mapped to multiple categories
+**Validation Error Example (Invalid Subcategory):**
 
-Unique Constraint: Each pair must be unique
-
-Active Only: Only active categories/subcategories allowed
-
-Atomic Updates: All changes happen in a transaction
-
-
-Validation Rules:
-
-category_id must exist and be active
-
-subcategory_id must be an array of active subcategories
-
-IDs must be integers
-
-
-
----
-
-Summary Table
-
-Method	Endpoint	Description
-
-GET	/api/category-management/categories	Get all active categories
-GET	/api/category-management/subcategories	Get all active subcategories
-GET	/api/category-management/mappings	Get category mappings
-POST	/api/category-management/add-subcategory	Update category-subcategory mappings
-
-
-
----
-
-Error Codes
-
-HTTP Code	Description
-
-200	Success
-400	Bad Request / Business Logic Error
-401	Unauthorized
-404	Category not found
-422	Unprocessable Entity (Validation)
-500	Internal Server Error
-
-
+```json
+{
+  "message": "The given data was invalid.",
+  "errors": {
+    "subcategory_id.1": [
+      "One or more selected subcategories do not exist or are not active."
+    ]
+  }
+}
+```
 
 ---
 
-Use Cases
+## Business Rules
 
-1. Initial Setup: Load categories and show mapped/available subcategories.
+### Category-Subcategory Mapping Rules
 
+* **One-to-Many**: One category can have multiple subcategories mapped to it
+* **Many-to-Many**: One subcategory can be mapped to multiple categories
+* **Unique Constraint**: Each category-subcategory pair can only exist once in the database
+* **Active Only**: Only active categories and subcategories can be used in mappings
+* **Atomic Updates**: All mapping changes for a category happen in a single transaction
 
-2. Adding Subcategories: Move items to mapped and save.
+### Validation Rules
 
-
-3. Removing Subcategories: Move items back to available and save.
-
-
-4. Bulk Operations: Update multiple mappings in one call.
-
-
-5. Reset/Clear All: Send an empty array to clear all mappings.
-
-
-
+* **Category ID**: Must exist in `src_sources` table with `type='category'` and `status='active'`
+* **Subcategory IDs**: Each must exist in `src_sources` table with `type='subcategory'` and `status='active'`
+* **Array Format**: Subcategory IDs must be provided as an array (empty array is valid)
+* **Integer Values**: All IDs must be valid integers
 
 ---
 
-Notes
+## Summary Table
 
-All routes require Sanctum token in Authorization header.
+| Method | Endpoint                                 | Description                          |
+| ------ | ---------------------------------------- | ------------------------------------ |
+| GET    | /api/category-management/categories      | Get all active categories            |
+| GET    | /api/category-management/subcategories   | Get all active subcategories         |
+| GET    | /api/category-management/mappings        | Get category mappings                |
+| POST   | /api/category-management/add-subcategory | Update category-subcategory mappings |
 
-Include domain: psri.com header in all requests.
+## Error Codes
 
-Responses and errors are JSON formatted.
+| HTTP Code | Description                        |
+| --------- | ---------------------------------- |
+| 200       | Success                            |
+| 400       | Bad Request / Business Logic Error |
+| 401       | Unauthorized                       |
+| 404       | Category not found                 |
+| 422       | Unprocessable Entity (Validation)  |
+| 500       | Internal Server Error              |
 
-Updates are transactional for data integrity.
+---
 
+---
+
+## Notes
+
+* **Authentication:** All routes require a valid Sanctum token in the `Authorization` header.
+* **Domain:** The `domain: psri.com` header is required for all requests.
+* **Content-Type:** Always set to `application/json`.
+* **Error Handling:** All error responses are in JSON format with detailed validation messages.
+* **Tenant Connection:** All operations use the tenant database connection.
+* **Transaction Safety:** All mapping updates happen within database transactions.
+* **Real-time Updates:** API returns current state after each update operation.
+
+---
 
