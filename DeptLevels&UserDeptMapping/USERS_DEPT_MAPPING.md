@@ -1,51 +1,55 @@
-# User-Department Mapping API Documentation
+# Department Levels API Documentation
 
-This API manages mappings between users and department levels/roles for tenants. All endpoints require Laravel Sanctum authentication.
+This document describes the Department Levels API as implemented in the codebase (controller, service, and routes).
+Endpoints are protected by Laravel Sanctum and many responses use the `DepartmentLevelResource`.
 
 ---
 
-## Database Table Structure
+## Database / Resource fields
 
-The `user_department_mappings` table (example) contains:
+The backend `DepartmentLevel` model exposes the following fields (via the resource):
 
-| # | Name             | Type                     | Attributes  | Null | Default | Extra           |
-| - | ---------------- | ------------------------ | ----------- | ---- | ------- | --------------- |
-| 1 | id               | bigint(20) unsigned      | Primary Key | No   | None    | AUTO_INCREMENT  |
-| 2 | user_id          | bigint(20) unsigned      | Foreign Key | No   | None    | indexed         |
-| 3 | department_id    | bigint(20) unsigned      | Foreign Key | No   | None    | indexed         |
-| 4 | dept_level_id    | bigint(20) unsigned      | Foreign Key | Yes  | NULL    | indexed         |
-| 5 | role_start_date  | date                     |             | Yes  | NULL    |                 |
-| 6 | role_end_date    | date                     |             | Yes  | NULL    |                 |
-| 7 | status           | enum('active','inactive')|             | No   | active  |                 |
-| 8 | created_at       | timestamp                |             | Yes  | NULL    |                 |
-| 9 | updated_at       | timestamp                |             | Yes  | NULL    |                 |
+| Field | Type | Notes |
+| ----- | ---- | ----- |
+| id | integer | Primary key |
+| level_order | integer | Ordering within department (auto-generated when not provided) |
+| level_name | string | Display name (unique) |
+| label_code | string | Short code (unique) |
+| is_highest | boolean | Marks the highest level |
+| status | string ('active'|'inactive') | |
+| created_at | timestamp | nullable |
+| updated_at | timestamp | nullable |
 
-**Sample Row:**
+Example resource object:
 
-| id | user_id | department_id | dept_level_id | role_start_date | role_end_date | status | created_at           |
-| -- | ------- | ------------- | ------------- | --------------- | ------------- | ------ | -------------------- |
-| 5  | 12      | 2             | 4             | 2025-07-01      | 2026-06-30    | active | 2025-07-01 09:00:00  |
+```json
+{
+  "id": 1,
+  "level_order": 1,
+  "level_name": "Level 1",
+  "label_code": "L1",
+  "is_highest": true,
+  "status": "active",
+  "created_at": "2025-06-28T01:29:01.000000Z",
+  "updated_at": "2025-06-28T01:29:01.000000Z"
+}
+```
 
 ---
 
 ## Base URL
 
 ```
-https://your-api-domain.com/api/user-department-mappings
-```
-
-There is also a department-scoped, paginated endpoint for convenience:
-```
-GET /api/departments/{department_id}/user-department-mappings
+https://your-api-domain.com/api/department-levels
 ```
 
 ---
 
-## Authentication & Headers
+## Authentication / Headers
 
 All endpoints require a valid Bearer token.
 
-**Required Headers:**
+Required headers (per project convention):
 
 ```http
 Content-Type: application/json
@@ -56,162 +60,145 @@ domain: psri.com
 
 ---
 
-## Endpoints
+## Supported Endpoints
 
-### 1. List All Mappings
-* **Endpoint:** `GET /api/user-department-mappings`
-* **Description:** Returns a list or paginated list of mappings. Supports query params: `page`, `per_page`, `search` (user name, dept name), `department_id`, `user_id`, `status`, `sort_by`, `sort_order`.
+> Notes: The route file registers `Route::apiResource('department-levels', DepartmentLevelController::class)->except(['destroy']);` — therefore DELETE is not exposed by default via the API routes. The controller contains a `destroy` method, but confirm routing if you expect DELETE to be available.
 
-**Example Request:**
+### 1. List Department Levels
+
+* **Endpoint:** `GET /api/department-levels`
+* **Description:** Returns paginated results by default (service uses the pagination trait). Supports query params:
+  - `page` (pagination)
+  - `per_page` (pagination size)
+  - `search` (searches `level_name`, `label_code`, `status`)
+  - `type` (special values: `active` or `highest` — see below)
+  - `sort_by`, `sort_order`
+
+Special `type` behavior implemented in controller:
+- `?type=active` — returns active department levels ordered by `level_order` (non-paginated list).
+- `?type=highest` — returns the single highest department level (non-paginated single resource).
+
+**Example request (paginated):**
+
 ```bash
-curl -X GET "https://your-api-domain.com/api/user-department-mappings?page=1&per_page=15&search=John" \
-  -H "Authorization: Bearer <your_token>" -H "domain: psri.com"
+GET /api/department-levels?page=1&per_page=10&search=Senior
 ```
 
-**Example Response (paginated):**
+**Example response (paginated wrapper):**
+
 ```json
 {
   "success": true,
   "status": 200,
-  "message": "Mappings fetched successfully",
+  "message": "Department levels fetched successfully",
   "data": {
     "current_page": 1,
-    "data": [
-      {
-        "id": 5,
-        "user_id": 12,
-        "user": { "id": 12, "name": "John Doe" },
-        "department_id": 2,
-        "department": { "id": 2, "name": "Production" },
-        "dept_level_id": 4,
-        "role_start_date": "2025-07-01",
-        "role_end_date": "2026-06-30",
-        "status": "active"
-      }
-    ],
-    "per_page": 15,
-    "total": 1
+    "data": [ /* array of department-level resources */ ],
+    "per_page": 10,
+    "total": 42
   }
 }
 ```
 
-> Note: The API may return a simple array or a paginated object. Frontends should normalize by using `response.data` when paginated.
+**Example: get all active levels (non-paginated resource collection):**
 
----
-
-### 2. Department-scoped List (recommended for department-first UIs)
-* **Endpoint:** `GET /api/departments/{department_id}/user-department-mappings`
-* **Description:** Returns mappings scoped to the department, supports same query params for pagination and search.
-
-**Example:**
-```bash
-GET /api/departments/2/user-department-mappings?page=1&per_page=10&search=smith
+```http
+GET /api/department-levels?type=active
 ```
 
+Response: JSON array of `DepartmentLevelResource` objects (200).
+
+**Example: get highest level:**
+
+```http
+GET /api/department-levels?type=highest
+```
+
+Response: single `DepartmentLevelResource` (200) or 404 if none found.
+
 ---
 
-### 3. Create Mapping(s)
-* **Endpoint:** `POST /api/user-department-mappings`
-* **Description:** Create a single mapping or multiple mappings in one request depending on implementation.
+### 2. Create Department Level
 
-**Single Example Body:**
+* **Endpoint:** `POST /api/department-levels`
+* **Description:** Create a new department level.
+
+**Request body (validated by `DepartmentLevelRequest`):**
+
 ```json
 {
-  "user_id": 12,
-  "department_id": 2,
-  "dept_level_id": 4,
-  "role_start_date": "2025-07-01",
-  "role_end_date": "2026-06-30"
+  "level_name": "Level 2",
+  "label_code": "L2",
+  "level_order": 2,        // optional; when omitted the server auto-generates the next order
+  "is_highest": false,
+  "status": "active"
 }
 ```
 
-**Bulk Example Body:**
-```json
-{
-  "department_id": 2,
-  "working_users": [
-    { "user_id": 12, "dept_level_id": 4, "role_start_date": "2025-07-01" },
-    { "user_id": 13, "dept_level_id": 4 }
-  ]
-}
-```
+**Success response:** 201 with created `DepartmentLevelResource`.
 
-**Success Response:**
-```json
-{ "message": "Created", "data": [ { "id": 21, "user_id": 12, "department_id": 2 } ] }
-```
-
-**Validation / Conflict (duplicate assignment) — HTTP 422:**
-```json
-{
-  "message": "Duplicate assignment",
-  "errors": {
-    "user_id": ["User already assigned to this department level"]
-  }
-}
-```
-
-**Important:** To avoid 422 duplicate-assignment when editing mappings in bulk, preserve existing mapping `id` values for items that already exist and call `PUT`/`PATCH` for those items; create only new mappings without an `id`.
+**Validation examples:**
+- `level_name` is required and unique (DB constraint `level_name_unique`).
+- `label_code` is required and unique (`label_code_unique`).
+- `level_order` is optional but must be integer >= 1 when present; DB may enforce uniqueness (`level_order_unique`).
 
 ---
 
-### 4. Update Mapping
-* **Endpoint:** `PUT /api/user-department-mappings/{id}`
-* **Description:** Update fields for an existing mapping. Preserve `id` when performing bulk edits so server treats them as updates rather than new creates.
+### 3. Get Single Department Level
 
-**Example Body:**
+* **Endpoint:** `GET /api/department-levels/{id}`
+* **Description:** Fetch a single department level by ID.
+
+**Success response:** 200 with `DepartmentLevelResource`.
+**Not found:** 404 with error message.
+
+---
+
+### 4. Update Department Level
+
+* **Endpoint:** `PUT /api/department-levels/{id}`
+* **Description:** Update an existing department level. Request is validated with `DepartmentLevelRequest` (unique rules ignore the current ID).
+
+**Request body:** same fields as create. Example:
+
 ```json
 {
-  "dept_level_id": 5,
-  "role_start_date": "2025-08-01",
-  "role_end_date": "2026-07-31"
+  "level_name": "Level 1 - Senior",
+  "label_code": "L1S",
+  "level_order": 1,
+  "is_highest": true,
+  "status": "active"
 }
 ```
 
-**Success Response:**
-```json
-{ "message": "Updated", "data": { "id": 5, "dept_level_id": 5 } }
-```
+**Success response:** 200 with updated `DepartmentLevelResource`.
 
 ---
 
-### 5. Delete Mapping
-* **Endpoint:** `DELETE /api/user-department-mappings/{id}`
-* **Description:** Remove a mapping. In bulk management forms, call delete for mappings removed from the UI that had an existing `id`.
+### (DELETE) Remove Department Level — not exposed by default
 
-**Success Response:**
-```json
-{ "message": "Deleted" }
-```
-
----
-
-## Frontend Integration Notes
-- Prefer department-first flows: load `GET /api/departments/{id}/user-department-mappings` with `page`, `per_page`, `search` for server-side paging and searching.
-- When pre-filling forms with existing mappings, keep the mapping `id` in the form state so updates are sent as `PUT` instead of creating duplicates.
-- Normalize responses: server may return paginated objects — in the frontend check for `.data`.
-- Send `page=1` when search query changes to reset paging.
-- Use debounce on search input (e.g., 300ms) to avoid request churn.
+The route registration currently excludes `destroy` from the resource routes (`->except(['destroy'])`). The controller contains a `destroy` method, but it will only be reachable if you expose the route. If enabled, `DELETE /api/department-levels/{id}` should return a success response on deletion or a 404 when the record isn't found.
 
 ---
 
 ## Implementation Notes / Gotchas
-- SQL ambiguous-column errors can occur when joining users/departments; server queries should qualify columns (e.g., `users.name`, `departments.name`) to avoid errors.
-- Bulk create/update flows must distinguish between new rows and existing rows by presence of `id`.
-- Validation will reject duplicate active assignments — design UI to preserve `id` and perform updates instead of blind creates.
+
+- The service auto-generates `level_order` when not supplied (see `DepartmentLevelService::getNextLevelOrder`).
+- When `is_highest` is set to true on create/update, the service clears the previous highest level automatically.
+- Database constraint names used in error handling: `level_name_unique`, `label_code_unique`, `level_order_unique` — client code (frontend hooks) maps these to friendly messages.
+- The `list` method supports search across `level_name`, `label_code`, and `status`, and uses sorting (default by `level_order`).
 
 ---
 
 ## Summary Table
 
-| Method | Endpoint                                                  | Description                              |
-| ------ | --------------------------------------------------------- | ---------------------------------------- |
-| GET    | /api/user-department-mappings                             | List mappings (global)                   |
-| GET    | /api/departments/{department_id}/user-department-mappings | List mappings for a department (paginated)|
-| POST   | /api/user-department-mappings                             | Create mapping(s)                        |
-| PUT    | /api/user-department-mappings/{id}                        | Update mapping                           |
-| DELETE | /api/user-department-mappings/{id}                        | Delete mapping                           |
+| Method | Endpoint                        | Description |
+| ------ | ------------------------------- | ----------- |
+| GET    | /api/department-levels          | List department levels (paginated)
+| GET    | /api/department-levels?type=active | Get all active levels (non-paginated)
+| GET    | /api/department-levels?type=highest | Get highest level (single resource)
+| POST   | /api/department-levels          | Create a department level
+| GET    | /api/department-levels/{id}     | Get a department level
+| PUT    | /api/department-levels/{id}     | Update a department level
 
 ---
-
-If you'd like this placed in another location (frontend repo or project wiki) or want sample API client snippets (axios/fetch) added, tell me where and I will add them.
