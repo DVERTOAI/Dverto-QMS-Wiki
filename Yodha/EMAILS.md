@@ -76,5 +76,3 @@ curl -X POST http://127.0.0.1:8000/api/send-mail \
 - Ensure your mail service (e.g., MailHog or real SMTP) is configured in `.env` file.
 - The backend will process the `data` object and render all key-value pairs in the email content.
 
-
-<img width="1410" height="686" alt="Screenshot 2025-09-10 120251" src="https://github.com/user-attachments/assets/9b8c023e-ebeb-43b0-ae4c-c608b182ad75" />
