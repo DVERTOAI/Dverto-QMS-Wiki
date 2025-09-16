@@ -1,4 +1,4 @@
-```markdown
+
 # Documents API Documentation
 
 This API manages **Documents, Permissions, Acknowledgments, Status, and Public URLs**.  
@@ -362,6 +362,5 @@ domain: psri.com
 | GET    | /public-urls                            | List all public URLs          |
 | DELETE | /public-urls/{id}                       | Remove public URL             |
 
-```
 
 
