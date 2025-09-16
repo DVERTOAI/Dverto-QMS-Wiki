@@ -305,7 +305,7 @@ storage/app/public/setting/{year}/{month}/{group}_{key}/{timestamp_filename}
     "errors": {
         "group": ["The group field is required."],
         "settings.0.key": ["The settings.0.key field is required."],
-        "settings.0.attachments.0": ["The file must be an image (jpeg, jpg, png, gif, webp) or document (pdf, doc, docx)."],
+        "settings.0.attachments.0": ["The file must be an image (jpeg, jpg, png, gif, webp)"],
         "settings.0.attachments.0": ["File size must not exceed 10MB."]
     }
 }
