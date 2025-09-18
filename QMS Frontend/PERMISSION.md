@@ -89,21 +89,21 @@ flowchart TD
 ```mermaid
 graph TB
     subgraph "Storage Layer"
-        LS[localStorage<br/>User Data]
+        LS[localStorage -User Data]
     end
     
     subgraph "Context Layer"
-        AC[AuthContext<br/>- user state<br/>- isAuthenticated<br/>- hasPermission()]
+        AC[AuthContext -- user state -- isAuthenticated -- hasPermission()]
     end
     
     subgraph "Utility Layer"
-        PU[Permission Utils<br/>- getUserPermissions()<br/>- hasPermission()<br/>- hasRoutePermission()]
+        PU[Permission Utils -- getUserPermissions() -- hasPermission() -- hasRoutePermission()]
     end
     
     subgraph "Component Layer"
-        PR[ProtectedRoute<br/>Route Guard]
-        UI[UI Components<br/>Conditional Rendering]
-        SB[Sidebar<br/>Menu Filtering]
+        PR[ProtectedRoute -Route Guard]
+        UI[UI Components -Conditional Rendering]
+        SB[Sidebar -Menu Filtering]
     end
     
     subgraph "Navigation Layer"
