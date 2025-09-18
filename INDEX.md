@@ -35,10 +35,9 @@
    - 8.3 [USER_BASED_PERMISSION.md](./QMS/RolePermission/USER_BASED_PERMISSION.md)
 
 ### 9. SRC Management
-   - 9.1 [SRC_Management.md](./QMS/SRC_Management/SRC_Management.md)
-   - 9.2 [CATEGORY_MANAGEMENT.md](./QMS/SRC_Management/CATEGORY_MANAGEMENT.md)
-   - 9.3 [CERTIFICATE_APLDOCUME.md](./QMS/SRC_Management/CERTIFICATE_APLDOCUME.md)
-   - 9.4 [DOWNLOAD_DOCUMENT.md](./QMS/SRC_Management/DOWNLOAD_DOCUMENT.md)
+   - 9.1 [CATEGORY_MANAGEMENT.md](./QMS/SRC%20Management/CATEGORY_MANAGEMENT.md)
+   - 9.2 [CERTIFICATE_APLDOCUME.md](./QMS/SRC%20Management/CERTIFICATE_APLDOCUME.md)
+   - 9.3 [DOWNLOAD_DOCUMENT.md](./QMS/SRC%20Management/DOWNLOAD_DOCUMENT.md)
 
 ### 10. System Settings
    - 10.1 [SETTINGS.md](./QMS/Settings/SETTINGS.md)
@@ -47,10 +46,8 @@
    - 11.1 [DESIGNATION.md](./QMS/Users/DESIGNATION.md)
    - 11.2 [USERS.md](./QMS/Users/USERS.md)
 
-### 12. Workflow Management
-   - 12.1 [WORKINGFLOW.md](./QMS/WorkingFlow/WORKINGFLOW.md)
-   - 12.2 [SEARCHING_SORTING_PAGIN.md](./QMS/WorkingFlow/SEARCHING_SORTING_PAGIN.md)
+### 12. WorkingHour Management
+   - 12.1 [WorkingHour.md](./QMS/WorkingFlow/WorkingHour.md)
 
-### 13. Communication System
-   - 13.1 [EMAILS.md](./QMS/Yodha/EMAILS.md)
+
 
