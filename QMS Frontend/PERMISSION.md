@@ -63,25 +63,16 @@ const { hasPermission } = useAuth();
 
 ```mermaid
 flowchart TD
-    A[User navigates to route] --> B{isLoading?}
-    B -->|Yes| L[Show Loading Spinner]
-    B -->|No| C{isAuthenticated?}
-    C -->|No| D[Redirect to Login]
-    C -->|Yes| E{Route = /dashboard?}
-    E -->|Yes| F[Render Component]
-    E -->|No| G{Required Permission Set?}
-    G -->|Yes| H{User has Required Permission?}
-    G -->|No| J{Route Permission Check}
-    H -->|No| I[Redirect to Dashboard + Error Toast]
-    H -->|Yes| J{hasRoutePermission?}
-    J -->|No| I
-    J -->|Yes| F[Render Component]
-    
+    A[User navigates to route] --> B{Authenticated?}
+    B -->|No| C[Redirect → Login]
+    B -->|Yes| D{Has Required Permission?}
+    D -->|No| E[Redirect → Dashboard + Error Toast]
+    D -->|Yes| F[Render Component]
+
     style A fill:#e1f5fe,color:#000
     style F fill:#c8e6c9,color:#000
-    style D fill:#ffcdd2,color:#000
-    style I fill:#ffcdd2,color:#000
-    style L fill:#fff3e0,color:#000
+    style C fill:#ffcdd2,color:#000
+    style E fill:#ffcdd2,color:#000
 
 ```
 ## Access Control
