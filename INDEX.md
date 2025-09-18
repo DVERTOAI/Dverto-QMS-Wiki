@@ -1,133 +1,56 @@
-# QMS (Quality Management System) - Complete Index
 
-## Overview
-This comprehensive Quality Management System provides a complete solution for managing organizational quality processes, compliance, and documentation.
+## Table of Contents
 
----
+### 1. QMS Frontend
+   - 1.1 [PERMISSION.md](./QMS%20Frontend/PERMISSION.md)
 
-## 📋 Core Modules
+### 2. QMS Core System
+   - 2.1 Main QMS Module
 
-### 1. **QMS Frontend**
-- [PERMISSION.md](./QMS%20Frontend/PERMISSION.md) - Frontend permission management
+### 3. Department Management
+   - 3.1 [DEPARTMENT.md](./QMS/Department/DEPARTMENT.md)
+   - 3.2 [DEPARTMENTS_AREA.md](./QMS/Department/DEPARTMENTS_AREA.md)
 
-### 2. **QMS Core**
-- Main QMS application module
+### 4. Document Management
+   - 4.1 [DOCUMENT.md](./QMS/Documents/DOCUMENT.md)
 
-### 3. **Department Management**
-- [DEPARTMENT.md](./QMS/Department/DEPARTMENT.md) - Department configuration
-- [DEPARTMENTS_AREA.md](./QMS/Department/DEPARTMENTS_AREA.md) - Area-wise department mapping
+### 5. Incident Management
+   - 5.1 [INCIDENT.md](./QMS/Incident/INCIDENT.md)
+   - 5.2 [INCIDENT_DETAIL.md](./QMS/Incident/INCIDENT_DETAIL.md)
 
----
+### 6. Indicators & KPIs
+   - 6.1 [ASSIGNEDINDICATOR.md](./QMS/Indicator/ASSIGNEDINDICATOR.md)
+   - 6.2 [INDICATOR.md](./QMS/Indicator/INDICATOR.md)
+   - 6.3 [INDICATORACTION.md](./QMS/Indicator/INDICATORACTION.md)
+   - 6.4 [KPIGRAPH.md](./QMS/Indicator/KPIGRAPH.md)
+   - 6.5 [NUMERATORDDENOMINATO.md](./QMS/Indicator/NUMERATORDDENOMINATO.md)
 
-## 📄 Document Management
+### 7. Observation System
+   - 7.1 [OBSERVATION.md](./QMS/Observation/OBSERVATION.md)
+   - 7.2 [OBSERVATION_DETAIL.md](./QMS/Observation/OBSERVATION_DETAIL.md)
 
-### Documents
-- [DOCUMENT.md](./QMS/Documents/DOCUMENT.md) - Document management system
+### 8. Role & Permission Management
+   - 8.1 [PERMISSION.md](./QMS/RolePermission/PERMISSION.md)
+   - 8.2 [ROLES.md](./QMS/RolePermission/ROLES.md)
+   - 8.3 [USER_BASED_PERMISSION.md](./QMS/RolePermission/USER_BASED_PERMISSION.md)
 
-### Incident Management
-- [INCIDENT.md](./QMS/Incident/INCIDENT.md) - Incident reporting and tracking
-- [INCIDENT_DETAIL.md](./QMS/Incident/INCIDENT_DETAIL.md) - Detailed incident analysis
+### 9. SRC Management
+   - 9.1 [SRC_Management.md](./QMS/SRC_Management/SRC_Management.md)
+   - 9.2 [CATEGORY_MANAGEMENT.md](./QMS/SRC_Management/CATEGORY_MANAGEMENT.md)
+   - 9.3 [CERTIFICATE_APLDOCUME.md](./QMS/SRC_Management/CERTIFICATE_APLDOCUME.md)
+   - 9.4 [DOWNLOAD_DOCUMENT.md](./QMS/SRC_Management/DOWNLOAD_DOCUMENT.md)
 
----
+### 10. System Settings
+   - 10.1 [SETTINGS.md](./QMS/Settings/SETTINGS.md)
 
-## 📊 Indicators & Metrics
+### 11. User Management
+   - 11.1 [DESIGNATION.md](./QMS/Users/DESIGNATION.md)
+   - 11.2 [USERS.md](./QMS/Users/USERS.md)
 
-### Key Performance Indicators
-- [ASSIGNEDINDICATOR.md](./QMS/Indicator/ASSIGNEDINDICATOR.md) - Assigned KPI tracking
-- [INDICATOR.md](./QMS/Indicator/INDICATOR.md) - Main indicator management
-- [INDICATORACTION.md](./QMS/Indicator/INDICATORACTION.md) - Actions based on indicators
-- [KPIGRAPH.md](./QMS/Indicator/KPIGRAPH.md) - KPI visualization and graphs
-- [NUMERATORDDENOMINATO.md](./QMS/Indicator/NUMERATORDDENOMINATO.md) - Mathematical calculation components
+### 12. Workflow Management
+   - 12.1 [WORKINGFLOW.md](./QMS/WorkingFlow/WORKINGFLOW.md)
+   - 12.2 [SEARCHING_SORTING_PAGIN.md](./QMS/WorkingFlow/SEARCHING_SORTING_PAGIN.md)
 
----
+### 13. Communication System
+   - 13.1 [EMAILS.md](./QMS/Yodha/EMAILS.md)
 
-## 👁️ Observation System
-
-### Observation Management
-- [OBSERVATION.md](./QMS/Observation/OBSERVATION.md) - Main observation module
-- [OBSERVATION_DETAIL.md](./QMS/Observation/OBSERVATION_DETAIL.md) - Detailed observation analysis
-
----
-
-## 🔐 Role & Permission Management
-
-### User Access Control
-- [PERMISSION.md](./QMS/RolePermission/PERMISSION.md) - Permission definitions
-- [ROLES.md](./QMS/RolePermission/ROLES.md) - Role management
-- [USER_BASED_PERMISSION.md](./QMS/RolePermission/USER_BASED_PERMISSION.md) - User-specific permissions
-
----
-
-## 🏢 Organizational Structure
-
-### Site & Location Management
-- [SRC_Management.md](./QMS/SRC_Management/SRC_Management.md) - Source/Site Resource Center management
-- [CATEGORY_MANAGEMENT.md](./QMS/SRC_Management/CATEGORY_MANAGEMENT.md) - Category organization
-- [CERTIFICATE_APLDOCUME.md](./QMS/SRC_Management/CERTIFICATE_APLDOCUME.md) - Certificate and applied document management
-- [DOWNLOAD_DOCUMENT.md](./QMS/SRC_Management/DOWNLOAD_DOCUMENT.md) - Document download functionality
-
----
-
-## ⚙️ System Configuration
-
-### Settings & Administration
-- [SETTINGS.md](./QMS/Settings/SETTINGS.md) - System configuration settings
-
-### User Management
-- [DESIGNATION.md](./QMS/Users/DESIGNATION.md) - User designation management
-- [USERS.md](./QMS/Users/USERS.md) - User profile management
-
----
-
-## 💼 Workflow Management
-
-### Work Process Control
-- [WORKINGFLOW.md](./QMS/WorkingFlow/WORKINGFLOW.md) - Workflow definition and management
-- [SEARCHING_SORTING_PAGIN.md](./QMS/WorkingFlow/SEARCHING_SORTING_PAGIN.md) - Search, sort, and pagination utilities
-
----
-
-## 📧 Communication
-
-### Email Integration
-- [EMAILS.md](./QMS/Yodha/EMAILS.md) - Email notification system
-
----
-
-## 🚀 Quick Navigation
-
-| Module | Primary Function | Key Features |
-|--------|------------------|--------------|
-| **Departments** | Organizational Structure | Area mapping, hierarchy management |
-| **Documents** | Document Control | Version control, approval workflows |
-| **Incidents** | Issue Management | Reporting, tracking, resolution |
-| **Indicators** | Performance Monitoring | KPIs, metrics, dashboards |
-| **Observations** | Quality Monitoring | Audit findings, corrective actions |
-| **Permissions** | Access Control | Role-based security, user rights |
-| **Settings** | System Config | Customization, preferences |
-| **Workflow** | Process Management | Automated workflows, approvals |
-
----
-
-## 📝 Getting Started
-
-1. **Setup**: Configure system settings and organizational structure
-2. **Users**: Set up user accounts and assign roles/permissions
-3. **Departments**: Define organizational departments and areas
-4. **Workflows**: Establish business process workflows
-5. **Monitoring**: Configure KPIs and observation protocols
-6. **Documents**: Implement document control procedures
-
----
-
-## 🔗 Related Resources
-
-- **Training Materials**: User guides and training documentation
-- **API Documentation**: Technical integration guides
-- **Compliance Standards**: Industry-specific quality standards
-- **Support**: Help desk and technical support resources
-
----
-
-*Last Updated: September 2025*
-*Version: 1.0*
