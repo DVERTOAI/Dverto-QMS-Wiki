@@ -77,11 +77,12 @@ flowchart TD
     J -->|No| I
     J -->|Yes| F[Render Component]
     
-    style A fill:#e1f5fe
-    style F fill:#c8e6c9
-    style D fill:#ffcdd2
-    style I fill:#ffcdd2
-    style L fill:#fff3e0
+    style A fill:#e1f5fe,color:#000
+    style F fill:#c8e6c9,color:#000
+    style D fill:#ffcdd2,color:#000
+    style I fill:#ffcdd2,color:#000
+    style L fill:#fff3e0,color:#000
+
 ```
 ## Access Control
 - **No auth** → Login page
