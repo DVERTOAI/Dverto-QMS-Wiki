@@ -23,21 +23,21 @@
    - 6.2 [INDICATOR.md](./QMS/Indicator/INDICATOR.md)
    - 6.3 [INDICATORACTION.md](./QMS/Indicator/INDICATORACTION.md)
    - 6.4 [KPIGRAPH.md](./QMS/Indicator/KPIGRAPH.md)
-   - 6.5 [NUMERATORDDENOMINATO.md](./QMS/Indicator/NUMERATORDDENOMINATO.md)
+   - 6.5 [NUMERATORDDENOMINATO.md](./QMS/Indicator/NUMERATORDENOMINATOR.md)
 
 ### 7. Observation System
    - 7.1 [OBSERVATION.md](./QMS/Observation/OBSERVATION.md)
    - 7.2 [OBSERVATION_DETAIL.md](./QMS/Observation/OBSERVATION_DETAIL.md)
 
 ### 8. Role & Permission Management
-   - 8.1 [PERMISSION.md](./QMS/RolePermission/PERMISSION.md)
-   - 8.2 [ROLES.md](./QMS/RolePermission/ROLES.md)
-   - 8.3 [USER_BASED_PERMISSION.md](./QMS/RolePermission/USER_BASED_PERMISSION.md)
+   - 8.1 [PERMISSION.md](./QMS/Roles&Permission/PERMISSION.md)
+   - 8.2 [ROLES.md](./QMS/Roles&Permission/ROLES.md)
+   - 8.3 [USER_BASED_PERMISSION.md](./QMS/Roles&Permission/USER_BASED_PERMISSION.md)
 
 ### 9. SRC Management
-   - 9.1 [CATEGORY_MANAGEMENT.md](./QMS/SRC%20Management/CATEGORY_MANAGEMENT.md)
-   - 9.2 [CERTIFICATE_APLDOCUME.md](./QMS/SRC%20Management/CERTIFICATE_APLDOCUME.md)
-   - 9.3 [DOWNLOAD_DOCUMENT.md](./QMS/SRC%20Management/DOWNLOAD_DOCUMENT.md)
+   - 9.1 [CATEGORY_MANAGEMENT.md](./QMS/SRC%20Management/CATEGORY_MANAGEMENT_API_DOCUMENTATION.md)
+   - 9.2 [CERTIFICATE_APLDOCUME.md](./QMS/SRC%20Management/CERTIFICATE_API_DOCUMENTATION.md)
+   - 9.3 [DOWNLOAD_DOCUMENT.md](./QMS/SRC%20Management/SOURCE_API_DOCUMENTATION.md)
 
 ### 10. System Settings
    - 10.1 [SETTINGS.md](./QMS/Settings/SETTINGS.md)
