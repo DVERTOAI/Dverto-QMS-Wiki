@@ -201,7 +201,7 @@ domain: psri.com
 
 ## 6. Toggle Document Status
 
-**POST** `/documents/{id}/toggle-status`
+**PATCH** `/documents/{id}/toggle-status`
 
 **Response:**
 
@@ -345,6 +345,67 @@ domain: psri.com
 ```
 
 ---
+---
+
+## 12. Acknowledge Document (via Public URL)
+
+**POST** `/public-urls/{token}/acknowledge`
+
+**Payload:**
+
+```json
+{
+  "acknowledged_by": "harsh"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "status": 200,
+  "message": "Document has been successfully acknowledged. Thank you!",
+  "data": null
+}
+```
+
+---
+
+## 13. Get Public Document Acknowledgments
+
+**GET** `/public-urls/{id}/acknowledgments`
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "status": 200,
+  "message": "Acknowledgments fetched successfully",
+  "data": [
+    {
+      "id": 2,
+      "document_upload_id": 2,
+      "acknowledged_by": "harsh",
+      "acknowledged_at": "2025-09-20T14:41:14.000000Z",
+      "created_at": "2025-09-20T14:41:14.000000Z",
+      "updated_at": "2025-09-20T14:41:14.000000Z"
+    },
+    {
+      "id": 1,
+      "document_upload_id": 2,
+      "acknowledged_by": "harsh",
+      "acknowledged_at": "2025-09-20T14:31:40.000000Z",
+      "created_at": "2025-09-20T14:31:40.000000Z",
+      "updated_at": "2025-09-20T14:31:40.000000Z"
+    }
+  ]
+}
+```
+
+---
+
 
 ## Summary Table
 
@@ -355,12 +416,15 @@ domain: psri.com
 | GET    | /documents/download/{id}                | Download a document           |
 | POST   | /documents/{id}/acknowledge             | Acknowledge a document        |
 | GET    | /documents/{id}/acknowledgments         | Get acknowledgments           |
-| POST   | /documents/{id}/toggle-status           | Toggle document active status |
+| PATCH  | /documents/{id}/toggle-status           | Toggle document active status |
 | POST   | /document-permissions                   | Assign permissions            |
 | GET    | /document-permissions?document\_id={id} | Get document permissions      |
 | POST   | /public-urls/{id}/generate              | Generate public URL           |
 | GET    | /public-urls                            | List all public URLs          |
 | DELETE | /public-urls/{id}                       | Remove public URL             |
+| POST   | /public-urls/{token}/acknowledge        | Acknowledge via public link   |
+| GET    | /public-urls/{id}                       | public document acknowledgment|
+
 
 
 
