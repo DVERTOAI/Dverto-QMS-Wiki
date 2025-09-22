@@ -15,7 +15,7 @@ The `indicators` table structure:
 | 3 | unit        | varchar(255)                                              |             | Yes  | NULL      |                 |
 | 4 | frequency   | enum('Daily', 'Weekly', 'Monthly', 'Quarterly', 'Yearly') |             | No   | 'Monthly' |                 |
 | 5 | formula     | string (nullable)                                         |             | Yes  | NULL      |                 |
-| 6 | status      | enum('Active', 'Inactive')                                |             | No   | 'Active'  |                 |
+| 6 | status      | enum('active', 'inactive')                                |             | No   | 'active'  |                 |
 | 7 | created\_at | timestamp                                                 |             | Yes  | NULL      |                 |
 | 8 | updated\_at | timestamp                                                 |             | Yes  | NULL      |                 |
 
@@ -89,7 +89,7 @@ The `indicators` table structure:
                 "unit": "Percentage",
                 "frequency": "Monthly",
                 "formula": null,
-                "status": "Active",
+                "status": "active",
                 "created_at": "2025-09-17T13:45:06.000000Z",
                 "updated_at": "2025-09-17T13:45:06.000000Z"
             },
@@ -99,7 +99,7 @@ The `indicators` table structure:
                 "unit": "Percentage",
                 "frequency": "Monthly",
                 "formula": null,
-                "status": "Active",
+                "status": "active",
                 "created_at": "2025-09-17T13:09:08.000000Z",
                 "updated_at": "2025-09-17T13:09:08.000000Z"
             },
@@ -109,7 +109,7 @@ The `indicators` table structure:
                 "unit": "Minut",
                 "frequency": "Monthly",
                 "formula": null,
-                "status": "Active",
+                "status": "active",
                 "created_at": "2025-09-17T13:08:48.000000Z",
                 "updated_at": "2025-09-17T13:08:48.000000Z"
             },
@@ -119,7 +119,7 @@ The `indicators` table structure:
                 "unit": "Percentage",
                 "frequency": "Monthly",
                 "formula": "(A + B) / 2",
-                "status": "Active",
+                "status": "active",
                 "created_at": "2025-09-16T14:29:40.000000Z",
                 "updated_at": "2025-09-17T08:35:18.000000Z"
             }
@@ -154,7 +154,7 @@ The `indicators` table structure:
         "unit": "Percentage",
         "frequency": "Monthly",
         "formula": "(A + B) / 2",
-        "status": "Active",
+        "status": "active",
         "created_at": "2025-09-16T14:29:40.000000Z",
         "updated_at": "2025-09-17T08:35:18.000000Z"
     }
@@ -215,6 +215,6 @@ The `indicators` table structure:
 ## ✅ Notes
 
 * **frequency field valid values:** `Daily`, `Weekly`, `Monthly`, `Quarterly`, `Yearly`
-* **status field valid values:** `Active`, `Inactive`
+* **status field valid values:** `active`, `Inactive`
 * API responses use standard success structure with `success`, `status`, `message`, and `data`.
 
