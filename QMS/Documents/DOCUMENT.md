@@ -25,22 +25,19 @@ domain: psri.com
 
 ---
 
-## Database Table Structure
+## 🗄 Database Table: `document_uploads`
 
-### document\_uploads
-
-| #  | Name                 | Type         | Null | Default | Extra           |
-| -- | -------------------- | ------------ | ---- | ------- | --------------- |
-| 1  | id                   | bigint(20)   | No   | None    | AUTO\_INCREMENT |
-| 2  | document\_name       | varchar(255) | No   | None    |                 |
-| 3  | document\_no         | varchar(255) | No   | None    | UNIQUE          |
-| 4  | document\_category   | varchar(255) | No   | None    |                 |
-| 5  | document\_file\_path | varchar(255) | No   | None    |                 |
-| 6  | search\_keywords     | json         | Yes  | NULL    |                 |
-| 7  | is\_active           | tinyint(1)   | No   | 1       |                 |
-| 8  | public\_token        | varchar(255) | Yes  | NULL    | UNIQUE          |
-| 9  | created\_at          | timestamp    | Yes  | NULL    |                 |
-| 10 | updated\_at          | timestamp    | Yes  | NULL    |                 |
+| # | Column             | Type            | Null | Default | Extra           |
+| - | ------------------ | --------------- | ---- | ------- | --------------- |
+| 1 | id                 | bigint UNSIGNED | No   | None    | AUTO\_INCREMENT |
+| 2 | document\_id       | bigint UNSIGNED | Yes  | NULL    |                 |
+| 3 | document\_category | varchar(255)    | No   | None    |                 |
+| 4 | document\_no       | varchar(255)    | No   | None    | UNIQUE, INDEX   |
+| 5 | search\_keywords   | json            | Yes  | NULL    |                 |
+| 6 | is\_active         | tinyint(1)      | No   | 1       |                 |
+| 7 | public\_token      | varchar(255)    | Yes  | NULL    | UNIQUE, INDEX   |
+| 8 | created\_at        | timestamp       | Yes  | NULL    |                 |
+| 9 | updated\_at        | timestamp       | Yes  | NULL    |                 |
 
 ---
 
@@ -49,6 +46,7 @@ domain: psri.com
 **GET** `/documents`
 
 **Response Example:**
+
 
 ```json
 {
@@ -59,23 +57,31 @@ domain: psri.com
     "current_page": 1,
     "data": [
       {
-        "id": 1,
+        "id": 3,
         "document_category": "HR Policy Updated",
-        "document_no": "DOC-2025-01",
-        "document_name": "Updated Employee Handbook",
-        "document_file_path": "documents/2025/09/DOC-2025-01/Updated_Employee_Handbook.pdf",
-        "search_keywords": ["employee","handbook","policy"],
+        "document_no": "DOC-13302",
+        "search_keywords": ["employee", "handbook", "policy"],
         "is_active": true,
         "public_token": null,
-        "view_url": "http://localhost/storage/documents/2025/09/DOC-2025-01/Updated_Employee_Handbook.pdf",
-        "download_url": "http://127.0.0.1:8000/api/documents/download/1",
-        "permissions": []
+        "view_url": "https://your-api-domain.com/storage/documents/DOC-13302.pdf",
+        "download_url": "https://your-api-domain.com/api/documents/download/3",
+        "permissions": [],
+        "document": {
+          "id": 8,
+          "name": "HR_Policy_Updated.pdf",
+          "mime_type": "application/pdf",
+          "size": 6914085,
+          "status": "active",
+          "file_path": "tenant/psri/documentupload/2025/09/DOC-13302/HR_Policy_Updated.pdf"
+        }
       }
     ],
-    "total": 4
+    "total": 3
   }
 }
 ```
+
+
 
 ---
 
