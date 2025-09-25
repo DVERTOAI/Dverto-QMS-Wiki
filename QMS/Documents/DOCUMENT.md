@@ -1,4 +1,3 @@
-
 # Documents API Documentation
 
 This API manages **Documents, Permissions, Acknowledgments, Status, and Public URLs**.  
@@ -9,10 +8,8 @@ All endpoints require **Laravel Sanctum authentication** unless noted otherwise.
 ## Base URL
 
 ```
-
-[https://your-api-domain.com/api](https://your-api-domain.com/api)
-
-````
+https://your-api-domain.com/api
+```
 
 ## Headers
 
@@ -21,7 +18,7 @@ Content-Type: application/json
 Accept: application/json
 Authorization: Bearer <your_token>
 domain: psri.com
-````
+```
 
 ---
 
@@ -46,7 +43,6 @@ domain: psri.com
 **GET** `/documents`
 
 **Response Example:**
-
 
 ```json
 {
@@ -80,8 +76,6 @@ domain: psri.com
   }
 }
 ```
-
-
 
 ---
 
@@ -133,7 +127,60 @@ domain: psri.com
 
 ---
 
-## 3. Download Document
+## 3. Get Single Document
+
+**GET** `/documents/{id}`
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "status": 200,
+  "message": "Document fetched successfully",
+  "data": {
+    "id": 1,
+    "document_id": 6,
+    "document_category": "HR Policy Updated",
+    "document_no": "DOC-133025-05",
+    "search_keywords": ["employee", "handbook", "policy"],
+    "is_active": true,
+    "public_token": "DOC-133025-05",
+    "created_at": "2025-09-22T05:21:10.000000Z",
+    "updated_at": "2025-09-22T05:29:19.000000Z",
+    "view_url": "https://dverto-qms-backend.test/storage/tenant/psri/document_uploads/2025/09/DOC-133025-05/1758518472_interview_questions_.pdf",
+    "download_url": "https://dverto-qms-backend.test/api/documents/download/1",
+    "document": {
+      "id": 6,
+      "documentable_type": "App\\Models\\Tenant\\Document\\DocumentUpload",
+      "documentable_id": 1,
+      "name": "1758518472_interview_questions_.pdf",
+      "file_path": "tenant/psri/document_uploads/2025/09/DOC-133025-05/1758518472_interview_questions_.pdf",
+      "mime_type": "application/pdf",
+      "size": 6914085,
+      "status": "active",
+      "created_at": "2025-09-22T05:21:12.000000Z",
+      "updated_at": "2025-09-22T05:21:12.000000Z"
+    },
+    "permissions": [
+      {
+        "id": 2,
+        "document_id": 1,
+        "admin_id": 2,
+        "read": true,
+        "download": false,
+        "print": false,
+        "acknowledged": false,
+        "acknowledged_at": null,
+      }
+    ]
+  }
+}
+```
+
+---
+
+## 4. Download Document
 
 **GET** `/documents/download/{id}`
 
@@ -141,7 +188,7 @@ domain: psri.com
 
 ---
 
-## 4. Acknowledge Document
+## 5. Acknowledge Document
 
 **POST** `/documents/{id}/acknowledge`
 
@@ -175,7 +222,7 @@ domain: psri.com
 
 ---
 
-## 5. Get Document Acknowledgments
+## 6. Get Document Acknowledgments
 
 **GET** `/documents/{id}/acknowledgments`
 
@@ -186,26 +233,45 @@ domain: psri.com
   "success": true,
   "status": 200,
   "message": "Acknowledgments fetched successfully",
-  "data": [
-    {
-      "id": 5,
-      "document_id": 1,
-      "admin_id": 1,
-      "acknowledged": true,
-      "acknowledged_at": "2025-09-16T06:41:38.000000Z",
-      "admin": {
-        "id": 1,
-        "name": "Tenant Admin",
-        "email": "admin@tenant.test"
+  "data": {
+    "current_page": 1,
+    "data": [
+      {
+        "id": 3,
+        "user_id": 3,
+        "acknowledged": true,
+        "acknowledged_at": "2025-09-25T03:25:40.000000Z",
+        "user": {
+          "id": 3,
+          "employee_id": "EMP-VRZMZ4",
+          "name": "Harsh Nishad",
+          "email": "hn3121147@gmail.com",
+          "department_id": 2
+        }
+      },
+      {
+        "id": 9,
+        "user_id": 1,
+        "acknowledged": true,
+        "acknowledged_at": "2025-09-25T03:23:03.000000Z",
+        "user": {
+          "id": 1,
+          "employee_id": "EMP001",
+          "name": "Tenant Admin",
+          "email": "admin@tenant.test",
+          "department_id": null
+        }
       }
-    }
-  ]
+    ],
+  
+    "total": 2
+  }
 }
 ```
 
 ---
 
-## 6. Toggle Document Status
+## 7. Toggle Document Status
 
 **PATCH** `/documents/{id}/toggle-status`
 
@@ -226,7 +292,7 @@ domain: psri.com
 
 ---
 
-## 7. Assign Permissions
+## 8. Assign Permissions
 
 **POST** `/document-permissions`
 
@@ -256,41 +322,51 @@ domain: psri.com
 
 ---
 
-## 8. Get Document Permissions
+## 9. Get Document Permissions
 
 **GET** `/document-permissions?document_id={id}`
 
+**Optional Query Parameters:**
+- `document_id` - Filter by document ID
+- `department_id` - Filter by department ID
+
+**Example:** `/document-permissions?department_id=2&document_id=1`
+
 **Response:**
 
-```json
-{
-  "success": true,
-  "status": 200,
-  "message": "Document permissions fetched successfully",
-  "data": [
-    {
-      "id": 2,
-      "document_id": 1,
-      "admin_id": 2,
-      "read": true,
-      "download": true,
-      "print": true
-    },
-    {
-      "id": 3,
-      "document_id": 1,
-      "admin_id": 3,
-      "read": true,
-      "download": false,
-      "print": false
+```json{
+    "success": true,
+    "status": 200,
+    "message": "Document permissions fetched successfully",
+    "data": {
+        "current_page": 1,
+        "data": [
+            {
+                "id": 3,
+                "document_id": 1,
+                "admin_id": 3,
+                "read": true,
+                "download": false,
+                "print": false,
+                "acknowledged": true,
+                "acknowledged_at": "2025-09-25T03:25:40.000000Z",
+                "created_at": "2025-09-15T14:34:37.000000Z",
+                "updated_at": "2025-09-25T03:25:40.000000Z",
+                "admin": {
+                    "id": 3,
+                    "employee_id": "EMP-VRZMZ4",
+                    "name": "Harsh Nishad",
+                    "email": "hn3121147@gmail.com",
+                }
+            }
+        ],
     }
-  ]
 }
 ```
 
 ---
 
-## 9. Generate Public URL
+## 10. Generate Public URL
 
 **POST** `/public-urls/{id}/generate`
 
@@ -309,7 +385,7 @@ domain: psri.com
 
 ---
 
-## 10. List Public URLs
+## 11. List Public URLs
 
 **GET** `/public-urls`
 
@@ -335,7 +411,48 @@ domain: psri.com
 
 ---
 
-## 11. Remove Public URL
+## 12. Get Public Document by Token
+
+**GET** `/public-urls/{token}`
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "status": 200,
+  "message": "Document fetched successfully",
+  "data": {
+    "id": 1,
+    "document_id": 6,
+    "document_category": "HR Policy Updated",
+    "document_no": "DOC-133025-05",
+    "search_keywords": ["employee", "handbook", "policy"],
+    "is_active": true,
+    "public_token": "DOC-133025-05",
+    "created_at": "2025-09-22T05:21:10.000000Z",
+    "updated_at": "2025-09-22T05:29:19.000000Z",
+    "view_url": "https://dverto-qms-backend.test/storage/tenant/psri/document_uploads/2025/09/DOC-133025-05/1758518472_interview_questions_.pdf",
+    "download_url": "https://dverto-qms-backend.test/api/documents/download/1",
+    "document": {
+      "id": 6,
+      "documentable_type": "App\\Models\\Tenant\\Document\\DocumentUpload",
+      "documentable_id": 1,
+      "name": "1758518472_interview_questions_.pdf",
+      "file_path": "tenant/psri/document_uploads/2025/09/DOC-133025-05/1758518472_interview_questions_.pdf",
+      "mime_type": "application/pdf",
+      "size": 6914085,
+      "status": "active",
+      "created_at": "2025-09-22T05:21:12.000000Z",
+      "updated_at": "2025-09-22T05:21:12.000000Z"
+    }
+  }
+}
+```
+
+---
+
+## 13. Remove Public URL
 
 **DELETE** `/public-urls/{id}`
 
@@ -351,9 +468,8 @@ domain: psri.com
 ```
 
 ---
----
 
-## 12. Acknowledge Document (via Public URL)
+## 14. Acknowledge Document (via Public URL)
 
 **POST** `/public-urls/{token}/acknowledge`
 
@@ -378,7 +494,7 @@ domain: psri.com
 
 ---
 
-## 13. Get Public Document Acknowledgments
+## 15. Get Public Document Acknowledgments
 
 **GET** `/public-urls/{id}/acknowledgments`
 
@@ -412,13 +528,13 @@ domain: psri.com
 
 ---
 
-
 ## Summary Table
 
 | Method | Endpoint                                | Description                   |
 | ------ | --------------------------------------- | ----------------------------- |
 | GET    | /documents                              | List all documents            |
 | POST   | /documents                              | Upload a new document         |
+| GET    | /documents/{id}                         | Get single document details   |
 | GET    | /documents/download/{id}                | Download a document           |
 | POST   | /documents/{id}/acknowledge             | Acknowledge a document        |
 | GET    | /documents/{id}/acknowledgments         | Get acknowledgments           |
@@ -427,10 +543,7 @@ domain: psri.com
 | GET    | /document-permissions?document\_id={id} | Get document permissions      |
 | POST   | /public-urls/{id}/generate              | Generate public URL           |
 | GET    | /public-urls                            | List all public URLs          |
+| GET    | /public-urls/{token}                    | Get public document by token  |
 | DELETE | /public-urls/{id}                       | Remove public URL             |
 | POST   | /public-urls/{token}/acknowledge        | Acknowledge via public link   |
-| GET    | /public-urls/{id}                       | public document acknowledgment|
-
-
-
-
+| GET    | /public-urls/{id}/acknowledgments       | Get public document acknowledgments |
