@@ -43,7 +43,7 @@ The `indicator_descriptions` table structure:
     "indicator_id": 4,
     "name": "D17",
     "title": "Denominor 2",
-    "status": "Active",
+    "status": "active",
     "nabh_standard": "Standard XYZ"
 }
 ```
@@ -59,7 +59,7 @@ The `indicator_descriptions` table structure:
         "indicator_id": 4,
         "name": "D17",
         "title": "Denominor 2",
-        "status": "Active",
+        "status": "active",
         "nabh_standard": "Standard XYZ",
         "updated_at": "2025-09-17T13:53:14.000000Z",
         "created_at": "2025-09-17T13:53:14.000000Z",
@@ -100,7 +100,7 @@ The `indicator_descriptions` table structure:
                     "unit": "Percentage",
                     "frequency": "Monthly",
                     "formula": null,
-                    "status": "Active",
+                    "status": "active",
                     "created_at": "2025-09-17T13:45:06.000000Z",
                     "updated_at": "2025-09-17T13:45:06.000000Z"
                 }
@@ -158,7 +158,7 @@ The `indicator_descriptions` table structure:
     "indicator_id": 1,
     "name": "D100",
     "title": "Patient Satisfaction Score",
-    "status": "Active",
+    "status": "active",
     "nabh_standard": "Standard XYZ"
 }
 ```
@@ -198,7 +198,7 @@ The `indicator_descriptions` table structure:
 
 ## ✅ Notes
 
-* `status` valid values: `Active`, `Inactive`
+* `status` valid values: `active`, `inactive`
 * The `indicator_id` links to the `indicators` table.
 * Paginated listing returns indicator description + related indicator data.
 * API follows standard success response format:
