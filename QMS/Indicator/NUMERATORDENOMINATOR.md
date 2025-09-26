@@ -148,7 +148,7 @@ The `indicator_descriptions` table structure:
 
 ### 🔹 4. Update Indicator Description
 
-* **Endpoint:** `PUT /api/indicator/description/{id}`
+* **Endpoint:** `POST /api/indicator/description/{id}`
 * **Description:** Update an existing indicator description.
 
 **Payload Example:**
@@ -192,7 +192,7 @@ The `indicator_descriptions` table structure:
 | POST   | /api/indicator/description      | Create a new description          |
 | GET    | /api/indicator/description      | List all descriptions (paginated) |
 | GET    | /api/indicator/description/{id} | Get a description by ID           |
-| PUT    | /api/indicator/description/{id} | Update a description              |
+| post    | /api/indicator/description/{id} | Update a description              |
 
 ---
 
