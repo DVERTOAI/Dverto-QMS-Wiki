@@ -92,6 +92,6 @@ Business process workflows and operational hour management.
 
 Mockdrill setup, checklist creation, and color code configuration.
 
-* 12.1 [CHECKLIST_API.md](./QMS/Mockdrill/CHECKLIST_API.md) - Checklist CRUD operations for mockdrills
-* 12.2 [COLORCODE_API.md](./QMS/Mockdrill/COLORCODE_API.md) - Color code management for mockdrills
+* 12.1 [CHECKLIST_API.md](./QMS/Mockdrill/CHECKLIST.md) - Checklist CRUD operations for mockdrills
+* 12.2 [COLORCODE_API.md](./QMS/Mockdrill/COLORCODE.md) - Color code management for mockdrills
 
