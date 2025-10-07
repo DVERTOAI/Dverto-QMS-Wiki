@@ -70,11 +70,6 @@ domain: psri.com
 | `from_date` | date    | `2025-09-01`                  | Fetch logs sent **on or after** this date  |
 | `to_date`   | date    | `2025-09-30`                  | Fetch logs sent **on or before** this date |
 | `search`    | string  | `admin@tenant.test`           | Search across recipient, subject, sender   |
-| `sort_by`   | string  | `created_at` / `status`       | Field to sort by                           |
-| `sort_dir`  | string  | `asc` / `desc`                | Sort direction                             |
-| `per_page`  | integer | `20`                          | Number of records per page (default: 10)   |
-| `page`      | integer | `1`                           | Page number                                |
-
 
 **Example Request:**
 
