@@ -165,8 +165,8 @@ curl -X GET "https://your-api-domain.com/api/profile" \
 
 | Field       | Rules                                           |
 | ----------- | ----------------------------------------------- |
-| name        | Required, string, max 255 characters           |
-| email       | Required, valid email, unique (excluding self) |
+| name        | Optional, string, max 255 characters           |
+| email       | Optional, valid email, unique (excluding self) |
 | mobile      | Optional, string, max 15 chars, unique         |
 | designation | Optional, string, max 255 characters           |
 | gender      | Optional, enum (male, female, other)           |
